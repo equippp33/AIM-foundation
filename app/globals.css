@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-inter: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-slatey-500 font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: theme("colors.brand.500");
+    color: #fff;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-ink;
+  }
+}
+
+@layer components {
+  /* Layout container */
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 sm:px-6 lg:px-8;
+  }
+
+  /* Eyebrow label (uppercase, letter-spaced, pink) */
+  .eyebrow {
+    @apply inline-block text-[12px] font-semibold uppercase tracking-[0.22em] text-brand-500;
+  }
+
+  /* Section heading underline used under centered headings */
+  .heading-underline {
+    @apply mx-auto mt-4 h-[3px] w-24 rounded-full;
+    background: linear-gradient(90deg, #e8336f 0%, #f9683f 100%);
+  }
+
+  /* Primary pink button */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-brand-500 px-7 py-3.5 text-[15px] font-semibold text-white transition-all duration-300 hover:bg-brand-600 hover:shadow-soft active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-[15px] font-medium text-white/85 transition-colors duration-300 hover:bg-white/10;
+  }
+
+  /* Gradient text used in hero second line */
+  .text-gradient {
+    background: linear-gradient(95deg, #f0588f 0%, #f9683f 60%, #fb9b53 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Generic raised card */
+  .card {
+    @apply rounded-lg border border-line bg-white shadow-card transition-all duration-300;
+  }
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-card-hover;
+  }
+
+  /* Section vertical rhythm */
+  .section {
+    @apply py-20 lg:py-28;
+  }
+
+  /**
+   * .num — approved typography for ALL numerical values site-wide.
+   * Design spec: Inter Regular 400, 36px, line-height 40px, letter-spacing 0px.
+   */
+  .num {
+    font-family: var(--font-inter);
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: 0px;
+  }
+}
+
+/* Reveal-on-scroll (paired with useReveal hook) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
