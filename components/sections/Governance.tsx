@@ -1,33 +1,30 @@
 import { governance } from "@/lib/content";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Icon, type IconName } from "@/components/ui/Icon";
 
 export function Governance() {
   return (
     <section id="governance" className="section bg-white">
       <div className="container-x">
-        <SectionHeading
-          eyebrow={governance.eyebrow}
-          title={governance.title}
-          subtitle={governance.intro}
-        />
+        <div className="reveal max-w-2xl">
+          <span className="eyebrow">{governance.eyebrow}</span>
+          <h2 className="mt-4 font-display text-[34px] leading-tight text-ink sm:text-[44px]">
+            {governance.title}
+          </h2>
+          <p className="mt-5 text-[16px] leading-relaxed text-slatey-500">{governance.intro}</p>
+        </div>
 
-        {/* SDG badges */}
-        <div className="reveal mt-10 flex flex-wrap items-stretch justify-center gap-3">
+        {/* SDG big number cards */}
+        <div className="reveal mt-12 flex flex-wrap items-stretch justify-center gap-4">
           {governance.sdgs.map((s) => (
             <div
               key={s.num}
-              className="flex max-w-[200px] items-center gap-3 rounded-xl border border-line bg-mist px-4 py-3"
+              className="flex min-w-[160px] max-w-[200px] flex-1 flex-col items-center justify-center gap-2 rounded-2xl border border-line bg-white px-5 py-6 text-center shadow-card"
             >
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-brand-500 to-coral-500 text-white">
-                <span className="num" style={{ fontSize: "16px", lineHeight: "20px" }}>
-                  {s.num}
-                </span>
+              <span className="num text-brand-500" style={{ fontSize: "48px", lineHeight: "52px" }}>
+                {s.num}
               </span>
-              <div>
-                <p className="text-[12.5px] font-semibold leading-tight text-ink">{s.title}</p>
-                <p className="mt-0.5 text-[11px] leading-snug text-slatey-400">{s.desc}</p>
-              </div>
+              <p className="text-[12.5px] font-semibold leading-tight text-ink">{s.title}</p>
+              <p className="text-[11px] leading-snug text-slatey-400">{s.desc}</p>
             </div>
           ))}
         </div>
