@@ -34,7 +34,7 @@ export function Footer() {
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className="text-[13.5px] text-slatey-500 transition-colors hover:text-ink"
+                      className="text-[13.5px] text-slatey-500 transition-colors hover:text-brand-600"
                     >
                       {l.label}
                     </a>
@@ -51,18 +51,18 @@ export function Footer() {
             </h3>
             <ul className="mt-4 space-y-3 text-[13.5px] text-slatey-500">
               <li className="flex items-start gap-2.5">
-                <Icon name="map-pin" size={16} className="mt-0.5 shrink-0 text-brand-400" />
+                <Icon name="map-pin" size={16} className="mt-0.5 shrink-0 text-brand-500" />
                 {footer.contactCol.address}
               </li>
               <li className="flex items-center gap-2.5">
-                <Icon name="phone" size={16} className="shrink-0 text-brand-400" />
-                <a href={`tel:${footer.contactCol.phone.replace(/\s/g, "")}`} className="hover:text-ink">
+                <Icon name="phone" size={16} className="shrink-0 text-brand-500" />
+                <a href={`tel:${footer.contactCol.phone.replace(/\s/g, "")}`} className="hover:text-brand-600">
                   <span className="num" style={{ fontSize: "13.5px", lineHeight: "20px" }}>{footer.contactCol.phone}</span>
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <Icon name="mail" size={16} className="shrink-0 text-brand-400" />
-                <a href={`mailto:${footer.contactCol.email}`} className="hover:text-ink">
+                <Icon name="mail" size={16} className="shrink-0 text-brand-500" />
+                <a href={`mailto:${footer.contactCol.email}`} className="hover:text-brand-600">
                   {footer.contactCol.email}
                 </a>
               </li>
@@ -74,7 +74,7 @@ export function Footer() {
                   key={s.name}
                   href={s.href}
                   aria-label={s.label}
-                  className="grid h-9 w-9 place-items-center rounded-lg border border-line bg-white text-slatey-500 transition-colors hover:bg-brand-500 hover:text-white"
+                  className="grid h-9 w-9 place-items-center rounded-lg border border-line bg-white text-slatey-500 transition-colors hover:bg-brand-500 hover:text-white hover:border-brand-500"
                 >
                   <Icon name={s.name} size={17} />
                 </a>

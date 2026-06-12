@@ -27,12 +27,12 @@ export function Navbar() {
           <Logo />
         </a>
 
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-6 xl:flex">
           {nav.links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-[15px] font-medium text-ink-soft/80 transition-colors hover:text-brand-500"
+              className="text-[14.5px] font-medium text-ink-soft/80 transition-colors hover:text-brand-500"
             >
               {l.label}
             </a>
@@ -40,13 +40,19 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
+          <a
+            href={nav.secondaryCta.href}
+            className="hidden text-[14.5px] font-medium text-ink-soft/80 transition-colors hover:text-brand-500 xl:inline-flex"
+          >
+            {nav.secondaryCta.label}
+          </a>
           <a href={nav.cta.href} className="btn-primary hidden sm:inline-flex !px-6 !py-2.5 !text-sm">
             {nav.cta.label}
           </a>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-md text-ink lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-md text-ink xl:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -57,7 +63,7 @@ export function Navbar() {
 
       {/* Mobile drawer */}
       <div
-        className={`overflow-hidden border-t border-line bg-white transition-all duration-300 lg:hidden ${
+        className={`overflow-hidden border-t border-line bg-white transition-all duration-300 xl:hidden ${
           open ? "max-h-96" : "max-h-0"
         }`}
       >

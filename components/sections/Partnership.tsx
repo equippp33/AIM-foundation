@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/Icon";
 
 export function Partnership() {
   return (
-    <section id="partnership" className="section bg-mist">
+    <section id="partnership" className="section bg-white">
       <div className="container-x">
         <SectionHeading
           eyebrow={partnership.eyebrow}
@@ -19,11 +19,15 @@ export function Partnership() {
               className="reveal relative overflow-hidden rounded-2xl bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
               style={{ transitionDelay: `${i * 100}ms` }}
             >
-
               {tier.featured && (
                 <span className="absolute right-5 top-5 rounded-full bg-brand-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-600">
                   Flagship
                 </span>
+              )}
+
+              {/* Top accent bar */}
+              {tier.featured && (
+                <div className="h-1 w-full bg-gradient-to-r from-brand-500 to-brand-300" />
               )}
 
               <div className="p-8">
@@ -36,7 +40,7 @@ export function Partnership() {
                 <ul className="mt-6 space-y-3">
                   {tier.points.map((pt) => (
                     <li key={pt} className="flex items-start gap-3">
-                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-50 text-emerald-500">
+                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-500">
                         <Icon name="check" size={13} />
                       </span>
                       <span className="text-[14px] leading-snug text-slatey-600">{pt}</span>

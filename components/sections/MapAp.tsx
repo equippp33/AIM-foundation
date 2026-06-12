@@ -2,16 +2,25 @@ import { mapap } from "@/lib/content";
 import { StatCard } from "@/components/ui/StatCard";
 import { Icon } from "@/components/ui/Icon";
 
+function BlockLabel({ letter, title }: { letter: string; title: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand-500 text-[13px] font-bold text-white">
+        {letter}
+      </span>
+      <h3 className="font-display text-[22px] text-ink">{title}</h3>
+    </div>
+  );
+}
+
 export function MapAp() {
   return (
     <section id="mapap" className="section bg-mist">
       <div className="container-x">
         {/* Heading */}
         <div className="reveal max-w-3xl">
-          <span className="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3.5 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-sky-700">
-            {mapap.tag}
-          </span>
-          <h2 className="mt-4 font-display text-[34px] leading-tight text-ink sm:text-[44px]">
+          <span className="eyebrow">{mapap.tag}</span>
+          <h2 className="mt-4 font-display text-[36px] leading-tight text-ink sm:text-[46px]">
             {mapap.title}
           </h2>
           <p className="mt-1 text-[17px] font-medium text-slatey-600">{mapap.subtitle}</p>
@@ -20,13 +29,32 @@ export function MapAp() {
           <p className="mt-4 text-[15px] leading-relaxed text-slatey-500">{mapap.body}</p>
         </div>
 
-        {/* Partner contributions */}
-        <div className="reveal mt-12">
-          <h3 className="font-display text-[22px] text-ink">{mapap.contributionsTitle}</h3>
+        {/* Pipeline */}
+        <div className="reveal mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {mapap.pipeline.map((step, i) => (
+            <div key={step} className="relative">
+              <div className="flex h-full flex-col items-center justify-center rounded-xl border border-line bg-white px-3 py-5 text-center shadow-card">
+                <span className="num text-brand-500" style={{ fontSize: "13px", lineHeight: "16px" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="mt-1.5 text-[13.5px] font-semibold text-ink">{step}</span>
+              </div>
+              {i < mapap.pipeline.length - 1 && (
+                <span className="absolute -right-2.5 top-1/2 z-10 hidden -translate-y-1/2 text-brand-400 lg:block">
+                  <Icon name="arrow-right" size={16} />
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* A — Partner Contributions */}
+        <div className="reveal mt-14">
+          <BlockLabel letter="A" title={mapap.contributionsTitle} />
           <div className="mt-5 grid gap-5 md:grid-cols-3">
             {mapap.contributions.map((c) => (
               <div key={c.party} className="card card-hover p-6">
-                <span className="grid h-10 w-10 place-items-center rounded-lg bg-sky-50 text-sky-600">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-brand-50 text-brand-600">
                   <Icon name="building" size={20} />
                 </span>
                 <h4 className="mt-4 text-[16px] font-semibold text-ink">{c.party}</h4>
@@ -36,29 +64,23 @@ export function MapAp() {
           </div>
         </div>
 
-        {/* Funding breakdown */}
-        <div className="reveal mt-12 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <div>
-            <h3 className="font-display text-[22px] text-ink">{mapap.fundingTitle}</h3>
-            <p className="mt-3 text-[14.5px] leading-relaxed text-slatey-500">
-              {mapap.fundingBody}
-            </p>
-
-            {/* Capital multiplier */}
-            <div className="mt-6 grid grid-cols-3 gap-4">
-              {mapap.multiplier.map((m) => (
-                <StatCard key={m.label} value={m.value} label={m.label} tint={m.tint as any} />
-              ))}
-            </div>
+        {/* B — Funding Impact */}
+        <div className="reveal mt-14">
+          <BlockLabel letter="B" title={mapap.fundingTitle} />
+          <p className="mt-3 max-w-3xl text-[14.5px] leading-relaxed text-slatey-500">
+            {mapap.fundingBody}
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            {mapap.multiplier.map((m) => (
+              <StatCard key={m.label} value={m.value} label={m.label} tint={m.tint as any} />
+            ))}
           </div>
+        </div>
 
-          {/* Cost table */}
-          <div className="card overflow-hidden p-0">
-            <div className="border-b border-line bg-mist px-6 py-4">
-              <span className="text-[12px] font-semibold uppercase tracking-[0.16em] text-slatey-600">
-                Fund Utilisation
-              </span>
-            </div>
+        {/* C — Fund Utilisation */}
+        <div className="reveal mt-14">
+          <BlockLabel letter="C" title="Fund Utilisation" />
+          <div className="card mt-5 overflow-hidden p-0">
             <div className="divide-y divide-line">
               {mapap.costs.map((c) => (
                 <div key={c.item} className="flex items-start justify-between gap-4 px-6 py-4">
@@ -81,10 +103,10 @@ export function MapAp() {
           </div>
         </div>
 
-        {/* How collection works */}
+        {/* D — Collection Workflow */}
         <div className="reveal mt-14">
-          <h3 className="font-display text-[22px] text-ink">{mapap.collectionTitle}</h3>
-          <p className="mt-2 max-w-2xl text-[14.5px] leading-relaxed text-slatey-500">
+          <BlockLabel letter="D" title={mapap.collectionTitle} />
+          <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-slatey-500">
             {mapap.collectionNote}
           </p>
           <div className="mt-6 grid gap-5 md:grid-cols-2">
@@ -102,9 +124,9 @@ export function MapAp() {
           </div>
         </div>
 
-        {/* Deliverables */}
-        <div className="reveal mt-12">
-          <h3 className="font-display text-[22px] text-ink">{mapap.deliverablesTitle}</h3>
+        {/* E — End of Month 3 Deliverables */}
+        <div className="reveal mt-14">
+          <BlockLabel letter="E" title={mapap.deliverablesTitle} />
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {mapap.deliverables.map((d) => (
               <div key={d.title} className="card card-hover p-5">

@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-display: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-inter: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-inter: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 @layer base {
@@ -19,7 +19,7 @@
   }
 
   ::selection {
-    background: theme("colors.brand.500");
+    background: #0ea5e9;
     color: #fff;
   }
 
@@ -37,7 +37,7 @@
     @apply mx-auto w-full max-w-container px-5 sm:px-6 lg:px-8;
   }
 
-  /* Eyebrow label (uppercase, letter-spaced, pink) */
+  /* Eyebrow label (uppercase, letter-spaced, sky-blue) */
   .eyebrow {
     @apply inline-block text-[12px] font-semibold uppercase tracking-[0.22em] text-brand-500;
   }
@@ -45,10 +45,10 @@
   /* Section heading underline used under centered headings */
   .heading-underline {
     @apply mx-auto mt-4 h-[3px] w-24 rounded-full;
-    background: linear-gradient(90deg, #e8336f 0%, #f9683f 100%);
+    background: linear-gradient(90deg, #0ea5e9 0%, #38bdf8 100%);
   }
 
-  /* Primary pink button */
+  /* Primary sky-blue button */
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full bg-brand-500 px-7 py-3.5 text-[15px] font-semibold text-white transition-all duration-300 hover:bg-brand-600 hover:shadow-soft active:scale-[0.98];
   }
@@ -59,18 +59,18 @@
 
   /* Gradient text used in hero second line */
   .text-gradient {
-    background: linear-gradient(95deg, #f0588f 0%, #f9683f 60%, #fb9b53 100%);
+    background: linear-gradient(95deg, #0ea5e9 0%, #38bdf8 60%, #7dd3fc 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* Generic raised card */
+  /* Generic raised card — softer modern radius, layered shadow, interactive hover */
   .card {
-    @apply rounded-lg border border-line bg-white shadow-card transition-all duration-300;
+    @apply rounded-2xl border border-line bg-white shadow-card transition-all duration-300 ease-out;
   }
   .card-hover:hover {
-    @apply -translate-y-1 shadow-card-hover;
+    @apply -translate-y-1.5 border-brand-200 shadow-card-hover;
   }
 
   /* Section vertical rhythm */

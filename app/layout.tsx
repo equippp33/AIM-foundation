@@ -13,10 +13,17 @@ export const metadata: Metadata = {
     "AIM Foundation",
     "AI MedTech Alliance",
     "healthcare infrastructure India",
-    "maternal health AI",
+    "AI in public health",
+    "maternal health programs",
+    "healthcare innovation",
+    "public health technology",
+    "healthcare nonprofit India",
+    "CSR healthcare projects",
+    "medical research programs",
+    "rural healthcare infrastructure",
+    "healthcare AI solutions",
     "Janani Mitra",
     "MAP-AP microbiome",
-    "CSR healthcare",
     "Section 8 non-profit",
   ],
   authors: [{ name: site.fullName }],
@@ -50,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>

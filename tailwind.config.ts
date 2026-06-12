@@ -22,20 +22,21 @@ const config: Config = {
           DEFAULT: "#16223f",
           soft: "#1e2c4d",
         },
-        // Brand pink / coral accent
+        // Brand sky-blue accent (replaces pink per redesign spec)
         brand: {
-          50: "#fdf2f6",
-          100: "#fce7ef",
-          200: "#fbcfe0",
-          300: "#f7a8c4",
-          400: "#f06fa0",
-          500: "#e8336f",
-          600: "#d61f5c",
-          700: "#b41449",
+          50: "#f0f9ff",
+          100: "#e0f2fe",
+          200: "#bae6fd",
+          300: "#7dd3fc",
+          400: "#38bdf8",
+          500: "#0ea5e9",
+          600: "#0284c7",
+          700: "#0369a1",
         },
+        // Cyan — gradient companion to brand
         coral: {
-          400: "#fb7f5c",
-          500: "#f9683f",
+          400: "#22d3ee",
+          500: "#06b6d4",
         },
         slatey: {
           400: "#8a97b0",
