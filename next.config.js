@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Produces a self-contained server bundle for Docker / Coolify deployment.
+  // See: https://nextjs.org/docs/app/api-reference/config/next-config-js/output
+  output: "standalone",
   images: {
     remotePatterns: [
       {

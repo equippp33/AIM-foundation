@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { createServerSupabaseClient } from "@/lib/supabase-server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -50,7 +51,34 @@ export async function POST(req: Request) {
     );
   }
 
-  // Amazon SES SMTP credentials.
+  // ── 1. Persist to Supabase ────────────────────────────────────────────────
+  try {
+    const supabase = createServerSupabaseClient();
+    const { error: dbError } = await supabase.from("sse_pledges").insert({
+      name,
+      email,
+      phone,
+      amount: amountNum,
+      // status starts as 'pending'; can be updated to 'confirmed' / 'cancelled'
+      status: "pending",
+    });
+
+    if (dbError) {
+      console.error("Supabase insert error:", dbError);
+      return NextResponse.json(
+        { error: "Could not save your pledge. Please try again." },
+        { status: 500 }
+      );
+    }
+  } catch (dbErr) {
+    console.error("Supabase client error:", dbErr);
+    return NextResponse.json(
+      { error: "Database connection failed. Please try again." },
+      { status: 500 }
+    );
+  }
+
+  // ── 2. Send confirmation email via Amazon SES ─────────────────────────────
   const user = process.env.SES_USER;
   const pass = process.env.SES_PASSWORD;
   const sender = process.env.SENDER_EMAIL;
@@ -58,7 +86,8 @@ export async function POST(req: Request) {
   const port = Number(process.env.SES_PORT || 587);
   if (!user || !pass || !sender) {
     console.error("Express form: missing SES_USER / SES_PASSWORD / SENDER_EMAIL env vars.");
-    return NextResponse.json({ error: "Email service is not configured." }, { status: 500 });
+    // Pledge is already saved — return success even if email is misconfigured
+    return NextResponse.json({ ok: true });
   }
 
   const transporter = nodemailer.createTransport({
@@ -111,9 +140,10 @@ export async function POST(req: Request) {
       process.env.NODE_ENV !== "production"
         ? String((err as Error)?.message ?? err)
         : undefined;
+    // Pledge is already in DB — return ok so the user isn't shown an error
+    // just because of an email delivery issue. Log it for ops.
     return NextResponse.json(
-      { error: "Could not send the email right now. Please try again.", ...(details ? { details } : {}) },
-      { status: 502 }
+      { ok: true, ...(details ? { warning: details } : {}) }
     );
   }
 }

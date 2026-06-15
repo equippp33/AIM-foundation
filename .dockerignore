@@ -1,0 +1,49 @@
+# ── Version control ──────────────────────────────────────────────────────────
+.git
+.gitignore
+
+# ── Development / local env ───────────────────────────────────────────────────
+.env*.local
+.env.development
+.env.test
+*.pem
+
+# ── Editor & OS noise ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea
+.vscode
+
+# ── Build artefacts (rebuilt inside Docker) ───────────────────────────────────
+.next
+out
+build
+dist
+
+# ── Dependencies (reinstalled inside Docker via pnpm) ─────────────────────────
+node_modules
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# ── TypeScript cache ──────────────────────────────────────────────────────────
+*.tsbuildinfo
+
+# ── Vercel (not used, but exclude if present) ─────────────────────────────────
+.vercel
+
+# ── Docker itself ─────────────────────────────────────────────────────────────
+Dockerfile
+.dockerignore
+
+# ── CI / CD configs ───────────────────────────────────────────────────────────
+.github
+.gitlab-ci.yml
+
+# ── Docs / README (not needed in image) ───────────────────────────────────────
+README.md
+CHANGELOG.md
