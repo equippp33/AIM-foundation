@@ -1,9 +1,11 @@
 /**
  * lib/content.ts
  * Single source of truth for all site content.
- * Premium copy for AIM Foundation — every fact (names, numbers, partners,
- * programs, compliance) is preserved; only the prose is elevated.
+ * Premium, storytelling-led copy for AIM Foundation — every fact (names, numbers,
+ * partners, programs, compliance) is preserved; only the prose is elevated.
  */
+
+import { PROJECTS } from "./projects";
 
 export const site = {
   name: "AIM Foundation",
@@ -16,74 +18,87 @@ export const site = {
 
 export const nav = {
   links: [
-    { label: "Infrastructure", href: "#infrastructure" },
+    { label: "How We Work", href: "#infrastructure" },
     { label: "About", href: "#about" },
     { label: "Programs", href: "#programs" },
     { label: "Impact", href: "#impact" },
     { label: "Governance", href: "#governance" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "#express" },
   ],
-  secondaryCta: { label: "Explore our impact", href: "#impact" },
-  cta: { label: "Express Now", href: "/express" },
+  secondaryCta: { label: "Explore our work", href: "#programs" },
+  cta: { label: "Express Now", href: "#express" },
 };
 
 export const hero = {
-  eyebrow: "AI & MedTech Alliance",
+  eyebrow: "AI & MedTech Alliance Foundation",
   badge: "Registered Section 8 Non-Profit",
-  titleLine1: "We treat healthcare",
-  titleLine2: "as infrastructure",
-  lead: "India's healthcare gaps are not a failure of compassion — they are a failure of infrastructure. AIM Foundation unites clinical excellence, artificial intelligence, and government partnerships to build the systems that carry proven medicine to the people who need it most.",
+  titleLine1: "Engineering the future of healthcare.",
+  titleLine2: "At Scale.",
+  lead: "We bridge clinical mastery, artificial intelligence and public health infrastructure to build scalable medical solutions across India — starting where the gap is most prominent.",
   sub: "We work at the intersection of clinical credibility, AI-driven tools, and government reach — closing the execution gap that keeps good science from becoming real-world transformation.",
-  primaryCta: { label: "Express Now", href: "/express" },
-  secondaryCta: { label: "Explore our impact", href: "#impact" },
+  primaryCta: { label: "Partner With Us", href: "#express" },
+  secondaryCta: { label: "Explore Our Work", href: "#programs" },
+};
+
+export const mission = {
+  quote:
+    "We exist at the intersection of clinical excellence, artificial intelligence, and public health reach — turning science and policy into systems that endure.",
+};
+
+export const partners = {
+  eyebrow: "Institutional Partners",
+  title: "Credibility isn't claimed. It's built — with the right partners.",
+  body: "AIM Foundation works with institutions that represent the highest standards in clinical care, scientific research, and academic excellence.",
 };
 
 export const infrastructure = {
-  eyebrow: "Healthcare Infrastructure",
-  title: "We treat healthcare as infrastructure",
-  body: "Good medicine already exists. What's missing is the infrastructure to deliver it — reliably, affordably, and at scale. We design and operate the connective systems that turn clinical breakthroughs into everyday access for India's underserved communities.",
+  eyebrow: "How We Work",
+  title: "Four forces. One system.",
+  body: "Clinical credibility, AI built as infrastructure, government partnership, and systems engineered to outlast us — four forces working as one.",
   badges: ["Section 8 Non-Profit", "CSR Eligible", "SDG Aligned"],
   features: [
     {
       icon: "stethoscope",
       title: "Clinical Credibility",
-      desc: "Anchored by AIG Hospitals and led by senior clinicians, every program is grounded in validated medical practice — never assumptions.",
+      desc: "Every program is anchored by AIG Hospitals and guided by senior clinicians. Nothing we build is assumption-led — everything is validated in the real world first.",
       featured: true,
     },
     {
       icon: "cpu",
-      title: "AI-Driven Tools",
-      desc: "Multilingual, real-time intelligence that turns frontline observation into timely, life-saving intervention.",
+      title: "AI as Infrastructure",
+      desc: "We don't use AI as a feature. We embed it as infrastructure — multilingual, real-time, and designed for the frontline worker in the field, not the clinician in the city.",
     },
     {
       icon: "building",
-      title: "Government Reach",
-      desc: "Signed MoUs and primary health centre access across entire constituencies — strengthening public systems, not building parallel ones.",
+      title: "Government as Partner",
+      desc: "We work inside existing public health systems, not around them. Signed MoUs, primary health centre access, ASHA worker integration — government reach, strengthened.",
     },
     {
       icon: "infinity",
       title: "Built to Outlast",
-      desc: "We engineer infrastructure that endures beyond a single grant cycle — systems that keep working long after we step back.",
+      desc: "We engineer for continuity. Our systems keep working long after we step back — independent of any single grant, cycle, or intervention.",
     },
   ],
 };
 
 export const about = {
-  eyebrow: "Who We Are",
+  eyebrow: "Our Premise",
   title: "About AIM Foundation",
+  headlineLines: ["The gap isn't science.", "It isn't compassion.", "It's the system."],
   paragraphs: [
-    "AIM Foundation is a registered Section 8 non-profit built on a single conviction: healthcare is infrastructure. India's most pressing health challenges are not a shortage of goodwill or of science — they are a shortage of the systems that carry proven care to the communities that need it. We exist to build those systems.",
-    "We work at the intersection of clinical excellence, artificial intelligence, and public health reach — partnering with leading hospitals, research institutions, and government bodies to pilot, validate, and scale solutions in the real world. We are not a charity distributing aid. We are an execution engine that turns science, policy, and technology into measurable public impact.",
+    "India has brilliant doctors. Dedicated researchers. Government health workers walking miles to reach the last household. What it has lacked — in maternal care, in rural diagnostics, in population-scale data — is the connective infrastructure that carries all of this together.",
+    "That is the gap AIM Foundation was built to close. We are not a charity, and we don't distribute aid. We design, pilot, and operate the systems that make proven healthcare reach further — reliably, affordably, and long after the funding cycle ends.",
   ],
   premise: {
-    title: "Our Premise",
-    body: "Healthcare is infrastructure. The gap is not goodwill — it is the system that fails to reach far enough, fast enough.",
+    title: "Not a Charity",
+    body: "We don't distribute aid. We design, pilot, and operate the systems that carry proven healthcare further into the communities that need it.",
   },
   approach: {
-    title: "Our Approach",
-    body: "We bridge clinical mastery, AI, and public health reach to pilot, validate, and scale solutions that endure well beyond a single funding cycle.",
+    title: "Built to Endure",
+    body: "Our systems are engineered for continuity — reliable, affordable, and independent of any single grant or funding cycle.",
   },
   leadershipTitle: "Leadership",
+  leadershipHeading: "Built by clinicians. Guided by science.",
   leadership: [
     {
       initial: "R",
@@ -91,7 +106,7 @@ export const about = {
       name: "Dr Rakesh Kalapala",
       role: "Founder & President",
       detail:
-        "Director at AIG Hospitals. Bridges frontline clinical practice and technology deployment across every AIM program.",
+        "Director at AIG Hospitals. Bridges the gap between frontline clinical practice and technology deployment — driving every AIM program from conception to the field.",
     },
     {
       initial: "N",
@@ -99,7 +114,7 @@ export const about = {
       name: "Dr D. Nageshwar Reddy",
       role: "Board Advisor",
       detail:
-        "Chairman of AIG Hospitals and one of India's most cited gastroenterologists. Provides clinical oversight and strategic direction.",
+        "Chairman of AIG Hospitals and one of India's most respected gastroenterologists. Provides the clinical oversight and strategic direction that gives every AIM initiative its institutional credibility.",
     },
     {
       initial: "S",
@@ -107,10 +122,11 @@ export const about = {
       name: "Dr Santanu Chattopadhyay",
       role: "Science Lead, MAP-AP",
       detail:
-        "Leads the microbiome research program at AIG's Barry Marshall Nobel Prize Centre, overseeing DNA sequencing, bioinformatics, and sample analysis.",
+        "Leads the microbiome research program at AIG's Barry Marshall Nobel Prize Centre — overseeing DNA sequencing, bioinformatics, and the scientific integrity of MAP-AP's 10,000-sample collection.",
     },
   ],
-  milestonesTitle: "Key Milestones",
+  milestonesTitle: "Where We Stand",
+  milestonesHeading: "Progress you can verify.",
   milestones: [
     { year: "S-8", text: "Registered as a Section 8 non-profit foundation" },
     { year: "Pilot", text: "Janani Mitra validated across an initial cohort of 5,000 pregnant women" },
@@ -135,8 +151,8 @@ export const collaborators = [
 ];
 
 export const impact = {
-  eyebrow: "Impact",
-  title: "Where the Impact Leads Us",
+  eyebrow: "Our Measure of Impact",
+  title: "We measure impact in lives — then build the system that makes it repeatable.",
   subtitle:
     "Our return is measured in lives, not just rupees — the mother carried safely through pregnancy, the frontline worker equipped to act, the researcher finally given data that reflects the population they serve.",
   pillars: [
@@ -144,56 +160,44 @@ export const impact = {
       icon: "heart",
       tint: "brand",
       title: "For Patients",
-      desc: "An expectant mother in a remote village receives the same precision monitoring as a metro hospital — at her doorstep, in her own language, through a health worker she already trusts.",
+      desc: "An expectant mother in a remote village receives the same precision monitoring as a city hospital — through a health worker she already trusts, in her own language, at her doorstep.",
     },
     {
       icon: "users",
       tint: "green",
       title: "For Frontline Workers",
-      desc: "ASHAs and ANMs carry rural public health on their shoulders. We equip them with multilingual AI tools that turn field observations into real-time, guided interventions.",
+      desc: "ASHAs carry rural public health on their shoulders with almost no decision-support. We give them AI tools that turn their field observations into timely, guided interventions.",
     },
     {
       icon: "flask",
       tint: "blue",
-      title: "For Science & Technology",
-      desc: "India has almost no large-scale biomedical data from its rural populations. We build the foundational datasets for diagnostics and therapies designed for Indian biology.",
+      title: "For Science",
+      desc: "India has almost no large-scale biomedical data from its rural populations. We build the foundational datasets that future diagnostics and therapies will be designed from — data that actually reflects who India is.",
     },
   ],
-  gap: {
-    eyebrow: "Execution Gap",
-    title: "The Execution Gap",
-    body: "Proven science exists. Government will exists. What's missing is the infrastructure that carries one to the other — especially across rural India. That gap is exactly where we work.",
-    flow: ["Science", "Infrastructure", "Government", "Impact"],
-    items: [
-      { icon: "alert-triangle", text: "No systemic delivery infrastructure" },
-      { icon: "map-pin-off", text: "Science that never reaches the field" },
-      { icon: "database-off", text: "No biomedical data from rural India" },
-      { icon: "unlink", text: "A persistent pilot-to-scale gap" },
-    ],
-  },
 };
 
 export const janani = {
   tag: "Flagship Program",
   title: "Janani Mitra",
-  subtitle: "AI-Powered Maternal Health Program",
+  subtitle: "A mother in a village. The same care as a metro hospital.",
   intro:
-    "Every year, mothers lose their lives to complications that are entirely preventable — not because the medicine doesn't exist, but because the system doesn't reach them in time. Janani Mitra closes that distance.",
-  body: "The program embeds an AI health companion directly into existing government infrastructure. It tracks nutrition, flags obstetric risk in real time, escalates emergencies, and communicates in the mother's own language. It has been presented to the Chief Minister of Andhra Pradesh and validated across an initial cohort of 5,000 pregnant women.",
-  techTitle: "What the Technology Does",
+    "Every year, preventable complications claim the lives of mothers and newborns who never received a warning in time — not because the medicine doesn't exist, but because the system didn't reach them. Janani Mitra changes that equation.",
+  body: "The program places an AI health companion inside the government's own maternal health infrastructure. It monitors nutrition, identifies obstetric risk before it becomes a crisis, and escalates emergencies through a centralised command system — speaking to women in Telugu, in their own terms and context. It has been validated across an initial cohort of 5,000 pregnant women and presented directly to the Chief Minister of Andhra Pradesh.",
+  techTitle: "What the Program Does",
   tech: [
-    "Machine-learning nutrition tracking with proactive dietary alerts",
-    "Automated, real-time obstetric risk identification",
-    "Multilingual AI guidance and chatbots (Telugu)",
-    "Centralised SOS command centres with defined escalation protocols",
+    "Real-time nutrition tracking with proactive dietary alerts",
+    "Automated obstetric risk identification",
+    "Telugu-language AI guidance and emergency chatbots",
+    "SOS escalation with defined command-centre protocols",
     "Four-tier monitoring dashboards for ASHA supervisors",
     "85%+ antenatal care compliance target",
   ],
   numbers: [
-    { value: "5,000+", label: "Women in pilot", tint: "brand" },
-    { value: "1,00,000", label: "FY 2026-27 target", tint: "green", featured: true },
-    { value: "500+", label: "ASHAs to be upskilled", tint: "amber" },
-    { value: "Rs. 100", label: "Cost per beneficiary", tint: "blue" },
+    { value: "5,000+", label: "Women in the pilot cohort", tint: "brand" },
+    { value: "1,00,000", label: "Target for FY 2026–27", tint: "green", featured: true },
+    { value: "500+", label: "ASHAs to be trained & activated", tint: "amber" },
+    { value: "₹100", label: "Cost per beneficiary", tint: "blue" },
   ],
   quote:
     "Presented directly to the Hon'ble Chief Minister of Andhra Pradesh. Featured in Eenadu. Independently validated in the field.",
@@ -202,12 +206,12 @@ export const janani = {
 export const mapap = {
   tag: "Research Program",
   title: "MAP-AP",
-  subtitle: "Microbiome Assessment Program, Andhra Pradesh",
-  lead: "India's first population-scale gut microbiome database.",
+  subtitle: "India's biology deserves India's own data.",
+  lead: "India's first population-scale rural gut microbiome database.",
   pipeline: ["Village", "PHC", "Collection", "Cold Chain", "AIG Lab", "Research"],
   intro:
-    "India has almost no large-scale gut microbiome data from its own rural populations. The global microbiome diagnostics market is approaching $15–20 billion, and every major research institution is racing to build these datasets. MAP-AP collects 10,000 biological samples — blood, sputum, and stool — from a rural population in Kuppam, Andhra Pradesh.",
-  body: "The science is led by Dr Santanu Chattopadhyay at AIG's Barry Marshall Nobel Prize Centre, and the government has granted primary health centre access across the constituency. Infrastructure, clinical credibility, and government partnership are already in place. What remains is the funding to reach people: the field teams, collection kits, and cold-chain logistics that move a sample from a village to a world-class lab.",
+    "The global microbiome research field is advancing rapidly, with institutions worldwide racing to build population-scale biological datasets. But almost none of that data reflects India's rural populations — people whose biology, diet, and disease patterns are distinct, and whose health challenges remain poorly understood. MAP-AP is changing that.",
+  body: "Conducted in Kuppam, Andhra Pradesh, the Microbiome Assessment Program collects 10,000 biological samples — blood, sputum, and stool — from a rural community. The science is led by Dr Santanu Chattopadhyay at AIG's Barry Marshall Nobel Prize Centre, government access across the Kuppam constituency is already secured, and AIG Hospitals is committing its full laboratory infrastructure — DNA sequencing, bioinformatics, and clinical oversight, a multi-crore in-kind investment already in place. What remains is the bridge between the village and the lab.",
   contributionsTitle: "Partner Contributions",
   contributions: [
     {
@@ -223,9 +227,9 @@ export const mapap = {
       desc: "End-to-end field operations: sample collection, cold-chain logistics, data capture, quality assurance, and transparent donor reporting.",
     },
   ],
-  fundingTitle: "Your Rs. 30 Lakhs — Exactly What It Funds",
+  fundingTitle: "Your ₹30 Lakhs — Exactly What It Funds",
   fundingBody:
-    "AIG Hospitals is committing a multi-crore investment in lab infrastructure, sequencing, and analysis. Your Rs. 30 lakhs fund the field operations that collect and deliver 10,000 samples to those labs. Without field collection, world-class lab capacity sits idle; without the labs, the samples have no value. This funding is the bridge between the two.",
+    "AIG Hospitals is committing a multi-crore investment in lab infrastructure, sequencing, and analysis. Your ₹30 lakhs fund the field operations that collect and deliver 10,000 samples to those labs. Without field collection, world-class lab capacity sits idle; without the labs, the samples have no value. This funding is the bridge between the two.",
   costs: [
     {
       item: "Collection kits & materials",
@@ -248,59 +252,21 @@ export const mapap = {
   ],
   costsTotal: { item: "Total Estimated Cost", cost: "₹29–35 L" },
   multiplier: [
-    { value: "Rs. 5 Cr+", label: "AIG in-kind contribution", tint: "blue" },
-    { value: "15x", label: "Capital multiplier on your Rs. 30L", tint: "brand", featured: true },
-    { value: "Rs. 3,000", label: "Cost per participant", tint: "green" },
-  ],
-  collectionTitle: "How Collection Works",
-  collectionNote:
-    "The model runs entirely on existing government health infrastructure — no new clinics, no new patient populations.",
-  collectionSteps: [
-    {
-      day: "Day 1",
-      title: "PHC visit & first samples",
-      desc: "Participants visit their local Primary Health Centre for a routine checkup. Our lab technician draws blood and collects a sputum sample, while a field assistant completes digital consent and hands over the stool-collection kit with Telugu-language instructions.",
-    },
-    {
-      day: "Day 2",
-      title: "Home collection & transport",
-      desc: "The field assistant visits the participant's home to collect the stool sample. All samples reach a central freezer within 2–4 hours, with batch dispatch to AIG every 7–10 days via dry-ice shippers and full temperature logging.",
-    },
-  ],
-  deliverablesTitle: "What You Receive at the End of Month 3",
-  deliverables: [
-    {
-      title: "10,000 samples preserved",
-      desc: "Biological samples safely collected and preserved at −80°C — a high-quality repository for years of future analysis and discovery.",
-    },
-    {
-      title: "Rich linked metadata",
-      desc: "Every sample linked to participant data — demographics, health history, and geographic context — enabling accurate, reproducible research insights.",
-    },
-    {
-      title: "Full traceability",
-      desc: "Complete transparency end to end: digital consent records, cold-chain monitoring, and comprehensive sample-tracking systems.",
-    },
-    {
-      title: "A proven, replicable model",
-      desc: "Evidence that large-scale, high-quality research can be conducted in underserved communities — and replicated across other regions.",
-    },
-    {
-      title: "Scientific contribution",
-      desc: "Co-authorship on peer-reviewed publications and a role in developing potentially patentable diagnostic biomarkers.",
-    },
+    { value: "₹5 Cr+", label: "AIG's committed in-kind lab infrastructure", tint: "blue" },
+    { value: "15×", label: "Capital multiplier on partner investment", tint: "brand", featured: true },
+    { value: "₹3,000", label: "Cost per participant", tint: "green" },
   ],
 };
 
 export const governance = {
-  eyebrow: "Governance & Compliance",
-  title: "Accountability, Built In",
+  eyebrow: "Accountability",
+  title: "Transparent by design. Not by obligation.",
   intro:
-    "Both programs sit squarely within Schedule VII, Section 135 of the Companies Act, 2013 — Clause (i), promoting preventive healthcare, and Clause (ix), research and incubation. Every project report maps directly to SDGs 3, 5, 9, 10, and 17.",
+    "Both programs are structured to meet the highest standards of institutional accountability. They qualify under Schedule VII, Section 135 of the Companies Act, 2013 — Clause (i), preventive healthcare, and Clause (ix), research and innovation. Every initiative maps directly to SDGs 3, 5, 9, 10, and 17.",
   sdgs: [
     { num: "3", title: "Good Health & Well-Being", desc: "Ensure healthy lives and promote well-being for all at all ages." },
     { num: "5", title: "Gender Equality", desc: "Achieve gender equality and empower all women and girls." },
-    { num: "9", title: "Industry, Innovation & Infrastructure", desc: "Build resilient infrastructure and foster innovation." },
+    { num: "9", title: "Innovation & Infrastructure", desc: "Build resilient infrastructure and foster innovation." },
     { num: "10", title: "Reduced Inequalities", desc: "Reduce inequality within and among countries." },
     { num: "17", title: "Partnerships for the Goals", desc: "Strengthen implementation and revitalise global partnership." },
   ],
@@ -313,7 +279,7 @@ export const governance = {
     {
       icon: "eye",
       title: "Donor Access",
-      desc: "Monthly progress reports with field photography and collection metrics, site visits welcome at any time, and a scope that adjusts if early results underperform before the full budget is deployed.",
+      desc: "Monthly field reports with verified data and photography, site visits welcome at any time, and a scope that adjusts if early results underperform before the full budget is deployed.",
     },
     {
       icon: "award",
@@ -324,19 +290,20 @@ export const governance = {
 };
 
 export const partnership = {
-  eyebrow: "Partnership Opportunity",
-  title: "Where Your Investment Goes",
+  eyebrow: "Partner With Us",
+  title: "The infrastructure exists. The partnerships are in place. What moves this forward is you.",
   subtitle:
-    "Whether you represent a CSR fund, a family office, an impact investor, or a mission-aligned institution, there is a structured, accountable entry point built for you.",
+    "Whether you lead a CSR fund, a family office, a healthcare institution, or a government initiative — there is a structured, accountable entry point built for you.",
   tiers: [
     {
       tag: "Janani Mitra",
-      amount: "Rs. 1 Crore",
+      program: "JANANI_MITRA",
+      amount: "₹1 Crore",
       pitch: "Scale validated AI maternal health to 1,00,000 women across Andhra Pradesh.",
       points: [
         "Validated pilot — 5,000 women already tracked",
         "Presented to the Chief Minister of Andhra Pradesh",
-        "Rs. 100 per beneficiary — exceptional unit economics",
+        "₹100 per beneficiary — exceptional unit economics",
         "500+ ASHAs upskilled and activated",
         "Featured in national media (Eenadu), with visibility included",
         "Full CSR compliance reporting and site access",
@@ -345,11 +312,12 @@ export const partnership = {
     },
     {
       tag: "MAP-AP",
-      amount: "Rs. 30 Lakhs",
+      program: "MAP_AP",
+      amount: "₹30 Lakhs",
       pitch: "Unlock India's first rural gut microbiome database.",
       points: [
-        "Rs. 30L activates ~Rs. 5 Crore of AIG lab infrastructure",
-        "15x capital multiplier — rare in CSR funding",
+        "₹30L activates ~₹5 Crore of AIG lab infrastructure",
+        "15× capital multiplier — rare in CSR funding",
         "Government MoU and PHC access already secured",
         "Collaboration on peer-reviewed publications",
         "Credit for patentable diagnostic biomarker outputs",
@@ -361,16 +329,16 @@ export const partnership = {
 };
 
 export const contact = {
-  eyebrow: "Contact",
-  title: "Partner With Us",
-  body: "We're looking for partners who see healthcare the way we do — not as a problem to manage, but as infrastructure to build. If that resonates with your vision, we'll show you exactly where your investment goes.",
+  eyebrow: "Get in Touch",
+  title: "Let's build something that lasts.",
+  body: "If you believe healthcare is infrastructure — and that the right systems can carry it further than any single intervention — we'd like to speak with you.",
   audience: [
     "Government stakeholders",
     "CSR leaders",
     "Family offices",
     "Philanthropists",
     "Healthcare institutions",
-    "Research organizations",
+    "Research organisations",
     "International partners",
   ],
   primaryCta: { label: "Express Now", href: "/express" },
@@ -391,10 +359,20 @@ export const contact = {
 };
 
 export const express = {
-  badge: "Social Stock Exchange (SSE)",
-  title: "Express Your Support",
-  amountLabel: "Amount (in multiples of ₹10,000)",
-  submitLabel: "Express",
+  eyebrow: "Partnership Opportunity",
+  title: "Express Your Interest",
+  intro:
+    "This is not a payment. It is an expression of intent. Our team will reach out to discuss your partnership.",
+  audienceNote:
+    "For CSR funds, HNI investors, family offices and impact-focused institutions — there is a structured entry point for everyone.",
+  nameLabel: "Full Name",
+  phoneLabel: "Mobile Number",
+  emailLabel: "Email Address",
+  projectLabel: "Project of Interest",
+  amountLabel: "Indicative Amount",
+  submitLabel: "Submit Expression of Interest",
+  // Programs live in lib/projects.ts (code = DB enum value, label = display text).
+  projects: PROJECTS,
 };
 
 export const footer = {

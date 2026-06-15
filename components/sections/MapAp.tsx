@@ -108,43 +108,6 @@ export function MapAp() {
             </div>
           </div>
         </div>
-
-        {/* D — Collection Workflow */}
-        <div className="reveal mt-14">
-          <BlockLabel letter="D" title={mapap.collectionTitle} />
-          <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-slatey-500">
-            {mapap.collectionNote}
-          </p>
-          <div className="mt-6 grid gap-5 md:grid-cols-2">
-            {mapap.collectionSteps.map((s) => (
-              <div key={s.day} className="card p-6">
-                <div className="flex items-center gap-3">
-                  <span className="rounded-md bg-brand-50 px-3 py-1 text-[12px] font-semibold text-brand-600">
-                    {s.day}
-                  </span>
-                  <h4 className="text-[16px] font-semibold text-ink">{s.title}</h4>
-                </div>
-                <p className="mt-3 text-[13.5px] leading-relaxed text-slatey-500">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* E — End of Month 3 Deliverables */}
-        <div className="reveal mt-14">
-          <BlockLabel letter="E" title={mapap.deliverablesTitle} />
-          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {mapap.deliverables.map((d) => (
-              <div key={d.title} className="card card-hover p-5">
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-emerald-50 text-emerald-500">
-                  <Icon name="check" size={16} />
-                </span>
-                <h4 className="mt-3 text-[15px] font-semibold text-ink">{d.title}</h4>
-                <p className="mt-1.5 text-[13px] leading-relaxed text-slatey-500">{d.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

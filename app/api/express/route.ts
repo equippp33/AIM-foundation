@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { createServerSupabaseClient } from "@/lib/supabase-server";
+import { isProjectCode, projectLabel } from "@/lib/projects";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -35,6 +36,7 @@ export async function POST(req: Request) {
   const name = String(body.name ?? "").trim();
   const email = String(body.email ?? "").trim();
   const phone = String(body.phone ?? "").trim();
+  const projectRaw = String(body.project ?? "").trim();
   const amountNum = Number(body.amount);
 
   // Server-side validation (never trust the client).
@@ -50,6 +52,14 @@ export async function POST(req: Request) {
       { status: 400 }
     );
   }
+  // `project` must be one of the DB enum codes (or empty). Reject anything else
+  // so the insert never fails on an invalid enum value.
+  if (projectRaw && !isProjectCode(projectRaw)) {
+    return NextResponse.json({ error: "Please select a valid program." }, { status: 400 });
+  }
+  // Enum code stored in the DB; friendly label used in emails.
+  const project = projectRaw || null;
+  const projectName = projectLabel(projectRaw);
 
   // ── 1. Persist to Supabase ────────────────────────────────────────────────
   try {
@@ -59,6 +69,7 @@ export async function POST(req: Request) {
       email,
       phone,
       amount: amountNum,
+      project: project || null,
       // status starts as 'pending'; can be updated to 'confirmed' / 'cancelled'
       status: "pending",
     });
@@ -100,6 +111,20 @@ export async function POST(req: Request) {
   const from = `AIM Foundation <${sender}>`;
   const amountFmt = amountNum.toLocaleString("en-IN");
   const refNumber = `SSE-${Math.floor(100000 + Math.random() * 900000)}`;
+  // Programs the support funds — the donor's selected program, or both when
+  // none was specified.
+  const programsDisplay = projectName || "Janani Mitra · MAP-AP";
+
+  // Per-program description blurbs (HTML). The "funds" paragraph shows only the
+  // selected program's blurb, or both when no program was specified.
+  const JANANI_BLURB = `<strong style="color:#0c1a2e;">Janani Mitra</strong>, our AI-powered maternal health platform reaching pregnant women in rural communities`;
+  const MAPAP_BLURB = `<strong style="color:#0c1a2e;">MAP-AP</strong>, India's first population-scale rural gut microbiome research initiative`;
+  const programsParagraph =
+    project === "JANANI_MITRA"
+      ? `Your support directly funds an active program on the ground in Andhra Pradesh — ${JANANI_BLURB}.`
+      : project === "MAP_AP"
+      ? `Your support directly funds an active program on the ground in Andhra Pradesh — ${MAPAP_BLURB}.`
+      : `Your support directly funds two active programs on the ground in Andhra Pradesh — ${JANANI_BLURB}, and ${MAPAP_BLURB}.`;
 
   // ── Shared email style tokens ─────────────────────────────────────────────
   const F = `font-family:'Segoe UI',Arial,Helvetica,sans-serif`;
@@ -122,9 +147,9 @@ export async function POST(req: Request) {
     <!-- Header -->
     <tr>
       <td style="background:linear-gradient(135deg,${BRAND_BG},#e0f2fe);padding:48px 48px 40px;text-align:center;">
-        <p style="${F};font-size:11px;font-weight:700;color:${BRAND};letter-spacing:2px;text-transform:uppercase;margin:0 0 14px;">SSE Pledge Received</p>
-        <h2 style="${F};font-size:26px;font-weight:800;color:#0c1a2e;margin:0 0 12px;line-height:1.3;">Thank You for Backing<br>AI-Driven Healthcare in India</h2>
-        <p style="${F};font-size:15px;color:#475569;margin:0;">Your pledge of <strong style="color:${BRAND_DARK};">₹${amountFmt}</strong> is a step toward reaching 1,00,000 underserved patients by FY 2026-27.</p>
+        <p style="${F};font-size:11px;font-weight:700;color:${BRAND};letter-spacing:2px;text-transform:uppercase;margin:0 0 14px;">Support Confirmed</p>
+        <h2 style="${F};font-size:26px;font-weight:800;color:#0c1a2e;margin:0 0 12px;line-height:1.3;">Your Support is Confirmed</h2>
+        <p style="${F};font-size:15px;color:#475569;margin:0;">Thank you for backing healthcare that reaches India's most underserved communities.</p>
       </td>
     </tr>
 
@@ -137,7 +162,7 @@ export async function POST(req: Request) {
         </p>
 
         <p style="${F};font-size:15px;color:#334155;line-height:1.8;margin:0 0 28px;">
-          We have successfully received your expression of support through <strong style="color:#0c1a2e;">SEBI's Social Stock Exchange (SSE)</strong>. AIM Foundation (AI &amp; MedTech Alliance) is dedicated to engineering scalable, AI-powered healthcare access for India's most underserved communities.
+          Thank you. We have received your expression of support — <strong style="color:#0c1a2e;">₹${amountFmt}</strong> toward building healthcare infrastructure that reaches India's most underserved communities.
         </p>
 
         <!-- Pledge details card -->
@@ -148,20 +173,20 @@ export async function POST(req: Request) {
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="padding:10px 0;border-bottom:1px solid ${BRAND_BORDER};">
-                    <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Pledge Amount</p>
+                    <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Amount</p>
                     <p style="${F};font-size:20px;font-weight:800;color:${BRAND_DARK};margin:4px 0 0;">₹${amountFmt}</p>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding:10px 0;border-bottom:1px solid ${BRAND_BORDER};">
-                    <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Instrument</p>
-                    <p style="${F};font-size:14px;font-weight:700;color:#0c1a2e;margin:4px 0 0;">Social Stock Exchange (SEBI SSE) — Zero Coupon Zero Principal</p>
+                    <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Programs</p>
+                    <p style="${F};font-size:15px;font-weight:700;color:#0c1a2e;margin:4px 0 0;">${escapeHtml(programsDisplay)}</p>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding:10px 0;">
-                    <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Reference Number</p>
-                    <p style="${F};font-size:14px;font-weight:700;color:#0c1a2e;margin:4px 0 0;">${refNumber}</p>
+                    <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Status</p>
+                    <p style="${F};font-size:14px;font-weight:700;color:#0c1a2e;margin:4px 0 0;">Expression of Intent Received</p>
                   </td>
                 </tr>
               </table>
@@ -169,41 +194,18 @@ export async function POST(req: Request) {
           </tr>
         </table>
 
-        <!-- Impact stats -->
-        <table width="100%" cellpadding="0" cellspacing="0" style="background:linear-gradient(135deg,${BRAND_BG},#e0f2fe);border:1px solid ${BRAND_BORDER};border-radius:16px;margin-bottom:28px;">
-          <tr>
-            <td style="padding:28px 24px;">
-              <p style="${F};font-size:11px;font-weight:700;color:${BRAND};letter-spacing:1.5px;text-transform:uppercase;margin:0 0 20px;text-align:center;">Your Pledge Fuels</p>
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td align="center" style="padding:0 8px;">
-                    <div style="font-size:22px;margin-bottom:6px;">🏥</div>
-                    <div style="${F};font-size:20px;font-weight:800;color:#0c1a2e;">15×</div>
-                    <div style="${F};font-size:11px;color:#64748b;margin-top:2px;">Capital Multiplier</div>
-                  </td>
-                  <td align="center" style="padding:0 8px;">
-                    <div style="font-size:22px;margin-bottom:6px;">👩‍⚕️</div>
-                    <div style="${F};font-size:20px;font-weight:800;color:#0c1a2e;">1,00,000+</div>
-                    <div style="${F};font-size:11px;color:#64748b;margin-top:2px;">Patients by FY27</div>
-                  </td>
-                  <td align="center" style="padding:0 8px;">
-                    <div style="font-size:22px;margin-bottom:6px;">🤖</div>
-                    <div style="${F};font-size:20px;font-weight:800;color:#0c1a2e;">AI+</div>
-                    <div style="${F};font-size:11px;color:#64748b;margin-top:2px;">Powered Diagnostics</div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
+        <!-- What your support funds -->
+        <p style="${F};font-size:15px;color:#334155;line-height:1.8;margin:0 0 28px;">
+          ${programsParagraph}
+        </p>
 
         <!-- Next steps -->
         <table width="100%" cellpadding="0" cellspacing="0" style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;margin-bottom:28px;">
           <tr>
             <td style="padding:20px 24px;">
-              <p style="${F};font-size:13px;font-weight:700;color:#92400e;margin:0 0 8px;">⚡ What happens next?</p>
+              <p style="${F};font-size:13px;font-weight:700;color:#92400e;margin:0 0 8px;">⚡ What happens next</p>
               <p style="${F};font-size:13px;color:#78350f;line-height:1.7;margin:0;">
-                Our team will reach out within <strong>2–3 business days</strong> to guide you through the formal SSE subscription process, KYC documentation, and fund transfer via the registered depository. No payment has been processed at this stage — this is your expression of intent.
+                Our team will contact you within <strong>2–3 business days</strong> for documentation and onboarding. No payment has been processed at this stage.
               </p>
             </td>
           </tr>
@@ -213,11 +215,8 @@ export async function POST(req: Request) {
         <table width="100%" cellpadding="0" cellspacing="0" style="background:linear-gradient(135deg,${BRAND_BG},#e0f2fe);border-radius:14px;margin-bottom:32px;">
           <tr>
             <td style="padding:28px 32px;text-align:center;">
-              <p style="${F};font-size:15px;color:#475569;line-height:1.8;margin:0 0 8px;">
-                Your belief in <strong style="color:#0c1a2e;">AI-powered healthcare</strong> is the foundation we build on. Together, we are closing the gap between cutting-edge medicine and the communities that need it most.
-              </p>
-              <p style="${F};font-size:13px;color:${BRAND};margin:0;font-style:italic;">
-                Engineering healthcare. At scale. For everyone.
+              <p style="${F};font-size:15px;color:#475569;line-height:1.8;margin:0;">
+                We're glad to have you with us.
               </p>
             </td>
           </tr>
@@ -227,10 +226,9 @@ export async function POST(req: Request) {
         <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #e2e8f0;padding-top:24px;">
           <tr>
             <td>
-              <p style="${F};font-size:14px;color:#334155;margin:0 0 4px;">Warm Regards,</p>
-              <p style="${F};font-size:15px;font-weight:700;color:#0c1a2e;margin:0 0 2px;">AIM Foundation Team</p>
-              <p style="${F};font-size:13px;color:#64748b;margin:0 0 2px;">AI &amp; MedTech Alliance Foundation</p>
-              <p style="${F};font-size:13px;color:#64748b;margin:0;">Supported by AIG Hospitals · Section 8 Non-Profit</p>
+              <p style="${F};font-size:14px;color:#334155;margin:0 0 4px;">Warm regards,</p>
+              <p style="${F};font-size:15px;font-weight:700;color:#0c1a2e;margin:0 0 2px;">Equippp Team</p>
+              <p style="${F};font-size:13px;color:#64748b;margin:0;"><a href="mailto:info@aimfoundation.ai" style="color:${BRAND_DARK};text-decoration:none;">info@aimfoundation.ai</a> | +91 96037 70001</p>
             </td>
           </tr>
         </table>
@@ -241,8 +239,8 @@ export async function POST(req: Request) {
     <!-- Footer -->
     <tr>
       <td style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:28px 48px;text-align:center;">
-        <p style="${F};font-size:12px;color:#64748b;margin:0 0 6px;">AIM Foundation · AI &amp; MedTech Alliance · Registered Section 8 Non-Profit · SEBI SSE Listed</p>
-        <p style="${F};font-size:11px;color:#94a3b8;margin:0;font-style:italic;">Bridging the gap between cutting-edge medicine and underserved communities.</p>
+        <p style="${F};font-size:12px;color:#64748b;margin:0 0 6px;">Registered Section 8 Non-Profit · Supported by AIG Hospitals</p>
+        <p style="${F};font-size:11px;color:#94a3b8;margin:0;">CSR-eligible under Schedule VII, Companies Act, 2013</p>
       </td>
     </tr>
 
@@ -264,7 +262,7 @@ export async function POST(req: Request) {
   <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.10);">
     <tr>
       <td style="background:linear-gradient(135deg,${BRAND_BG},#e0f2fe);padding:32px 40px;text-align:center;">
-        <p style="${F};font-size:11px;font-weight:700;color:${BRAND};letter-spacing:2px;text-transform:uppercase;margin:0 0 8px;">New SSE Pledge</p>
+        <p style="${F};font-size:11px;font-weight:700;color:${BRAND};letter-spacing:2px;text-transform:uppercase;margin:0 0 8px;">New Support Pledge</p>
         <h2 style="${F};font-size:22px;font-weight:800;color:#0c1a2e;margin:0;">₹${amountFmt} — ${escapeHtml(name)}</h2>
         <p style="${F};font-size:12px;color:#64748b;margin:8px 0 0;">Ref: ${refNumber}</p>
       </td>
@@ -284,8 +282,16 @@ export async function POST(req: Request) {
             <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Phone</p>
             <p style="${F};font-size:14px;font-weight:700;color:#0c1a2e;margin:3px 0 0;">${escapeHtml(phone)}</p>
           </td></tr>
+          ${
+            project
+              ? `<tr><td style="padding:14px 20px;border-bottom:1px solid #f1f5f9;">
+            <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Program of Interest</p>
+            <p style="${F};font-size:14px;font-weight:700;color:#0c1a2e;margin:3px 0 0;">${escapeHtml(projectName)}</p>
+          </td></tr>`
+              : ""
+          }
           <tr><td style="padding:14px 20px;">
-            <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Pledge Amount</p>
+            <p style="${F};font-size:12px;color:${BRAND};font-weight:600;margin:0;">Indicative Amount</p>
             <p style="${F};font-size:18px;font-weight:800;color:${BRAND_DARK};margin:3px 0 0;">₹${amountFmt}</p>
           </td></tr>
         </table>
@@ -308,7 +314,7 @@ export async function POST(req: Request) {
       from,
       to: email,
       replyTo: sender,
-      subject: `Your SSE Pledge is Confirmed — AIM Foundation (Ref: ${refNumber})`,
+      subject: `Your Support is Confirmed — AIM Foundation`,
       html: donorHtml,
     });
 

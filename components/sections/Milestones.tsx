@@ -8,7 +8,7 @@ export function Milestones() {
         <div className="reveal max-w-2xl">
           <span className="eyebrow">{about.milestonesTitle}</span>
           <h2 className="mt-4 font-display text-[34px] leading-tight text-ink sm:text-[44px]">
-            {about.milestonesTitle}
+            {about.milestonesHeading}
           </h2>
         </div>
 

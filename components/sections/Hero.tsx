@@ -1,5 +1,6 @@
 import { hero } from "@/lib/content";
 import { Icon } from "@/components/ui/Icon";
+import { HeroBackground } from "@/components/sections/HeroBackground";
 
 export function Hero() {
   return (
@@ -22,7 +23,10 @@ export function Hero() {
         }}
       />
 
-      <div className="container-x relative w-full py-24 lg:py-28">
+      {/* Living healthcare-network animation (ECG pulse + AI particles + nodes) */}
+      <HeroBackground />
+
+      <div className="container-x relative z-10 w-full py-24 lg:py-28">
         <div className="reveal mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-2.5 text-[12px] font-semibold uppercase tracking-[0.22em] text-brand-600">
             <span className="h-px w-7 bg-brand-500" />

@@ -1,4 +1,4 @@
-import { about, site } from "@/lib/content";
+import { about } from "@/lib/content";
 
 export function About() {
   return (
@@ -8,12 +8,14 @@ export function About() {
           {/* Left — heading block */}
           <div className="reveal">
             <span className="eyebrow">{about.eyebrow}</span>
-            <h2 className="mt-4 font-display text-[40px] font-bold leading-[1.05] text-ink sm:text-[48px]">
-              {site.name}
+            <h2 className="mt-4 font-display text-[34px] font-bold leading-[1.1] text-ink sm:text-[42px]">
+              {about.headlineLines.map((line, i) => (
+                <span key={i} className={i === about.headlineLines.length - 1 ? "text-brand-500" : undefined}>
+                  {line}
+                  {i < about.headlineLines.length - 1 && <br />}
+                </span>
+              ))}
             </h2>
-            <p className="mt-1 font-display text-[28px] leading-tight text-brand-500 sm:text-[34px]">
-              {site.fullName.replace(" Foundation", "")}
-            </p>
           </div>
 
           {/* Right — copy */}

@@ -1,6 +1,7 @@
 import { partnership } from "@/lib/content";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Icon } from "@/components/ui/Icon";
+import { FundButton } from "@/components/ui/FundButton";
 
 export function Partnership() {
   return (
@@ -65,17 +66,14 @@ export function Partnership() {
                   ))}
                 </ul>
 
-                <a
-                  href="#contact"
+                <FundButton
+                  program={tier.program}
                   className={`mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-semibold transition-all duration-300 active:scale-[0.98] ${
                     tier.featured
                       ? "bg-white text-brand-600 hover:bg-white/90"
                       : "border border-line bg-white text-ink hover:border-brand-300 hover:text-brand-600"
                   }`}
-                >
-                  Fund this program
-                  <Icon name="arrow-right" size={18} />
-                </a>
+                />
               </div>
             </div>
           ))}
