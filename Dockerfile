@@ -20,8 +20,10 @@ WORKDIR /app
 # Copy manifests first — Docker cache only invalidates when these change
 COPY package.json package-lock.json ./
 
-# npm ci is the CI/CD equivalent of npm install — uses the lockfile exactly
-RUN npm ci --ignore-scripts
+# npm install instead of npm ci — lockfile was generated on Windows; Alpine Linux
+# resolves some optional native bindings (@emnapi/*) at different patch versions,
+# which causes npm ci to reject the lockfile. npm install handles this correctly.
+RUN npm install --ignore-scripts
 
 # =============================================================================
 # STAGE 2 — builder
