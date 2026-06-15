@@ -22,78 +22,6 @@ import {
  * the user prefers reduced motion.
  */
 
-// ── ECG waveform ────────────────────────────────────────────────────────────
-// Builds one tile that starts and ends exactly on the baseline, so two tiles
-// laid end-to-end scroll seamlessly. One beat is a taller "impact" peak.
-function buildEcgPath(width: number, base: number): string {
-  const beats = [
-    { x: 220, r: 70 },
-    { x: 600, r: 70 },
-    { x: 980, r: 150 }, // impact / innovation peak
-    { x: 1360, r: 70 },
-  ];
-  let d = `M0 ${base}`;
-  for (const { x, r } of beats) {
-    d += ` L ${x - 90} ${base}`; // flat approach
-    d += ` L ${x - 60} ${base - 12}`; // P wave up
-    d += ` L ${x - 40} ${base}`; // P wave down
-    d += ` L ${x - 14} ${base + 16}`; // Q dip
-    d += ` L ${x} ${base - r}`; // R spike
-    d += ` L ${x + 14} ${base + 30}`; // S below baseline
-    d += ` L ${x + 26} ${base}`; // return to baseline
-    d += ` L ${x + 56} ${base - 20}`; // T wave up
-    d += ` L ${x + 88} ${base}`; // T wave down
-  }
-  d += ` L ${width} ${base}`;
-  return d;
-}
-
-const ECG_W = 1600;
-const ECG_H = 320;
-const ECG_BASE = 160;
-const ECG_PATH = buildEcgPath(ECG_W, ECG_BASE);
-
-function EcgTile({ id }: { id: string }) {
-  return (
-    <svg
-      viewBox={`0 0 ${ECG_W} ${ECG_H}`}
-      preserveAspectRatio="none"
-      className="h-full w-1/2 shrink-0"
-    >
-      <defs>
-        <linearGradient id={`ecg-grad-${id}`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#1DA1F2" />
-          <stop offset="55%" stopColor="#36B4FF" />
-          <stop offset="100%" stopColor="#4FC3FF" />
-        </linearGradient>
-        <filter id={`ecg-glow-${id}`} x="-10%" y="-60%" width="120%" height="220%">
-          <feGaussianBlur stdDeviation="8.5" />
-        </filter>
-      </defs>
-      {/* soft bloom underlay */}
-      <path
-        d={ECG_PATH}
-        fill="none"
-        stroke={`url(#ecg-grad-${id})`}
-        strokeWidth={15}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        opacity={0.65}
-        filter={`url(#ecg-glow-${id})`}
-      />
-      {/* crisp line */}
-      <path
-        d={ECG_PATH}
-        fill="none"
-        stroke={`url(#ecg-grad-${id})`}
-        strokeWidth={5.2}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 // ── Ambient data particles (deterministic → no hydration mismatch) ───────────
 const PARTICLES = [
   { left: "7%", top: "28%", size: 5, dur: 9, delay: 0, drift: 20 },
@@ -136,8 +64,6 @@ export function HeroBackground() {
   const sx = useSpring(mx, { stiffness: 55, damping: 22, mass: 0.6 });
   const sy = useSpring(my, { stiffness: 55, damping: 22, mass: 0.6 });
 
-  const ecgX = useTransform(sx, [-1, 1], [14, -14]);
-  const ecgY = useTransform(sy, [-1, 1], [10, -10]);
   const nodesX = useTransform(sx, [-1, 1], [26, -26]);
   const nodesY = useTransform(sy, [-1, 1], [18, -18]);
   const particlesX = useTransform(sx, [-1, 1], [-18, 18]);
@@ -219,25 +145,6 @@ export function HeroBackground() {
         ))}
       </motion.div>
 
-      {/* Glowing ECG pulse line — seamless left→right flow.
-          Biased just above the hero's vertical centre so the tall peaks rise up
-          behind the headline / "At Scale." line while the waveform flows down
-          toward the CTA buttons — making the pulse feel like it runs *through*
-          the message, not beneath it. Height is clamped so it scales across
-          desktop / tablet / mobile and never reaches the bottom edge. */}
-      <motion.div
-        className="absolute inset-x-0 top-[40%] h-[clamp(300px,46vh,520px)] -translate-y-1/2 opacity-[0.16] [will-change:transform]"
-        style={{ x: ecgX, y: ecgY }}
-      >
-        <motion.div
-          className="flex h-full w-[200%]"
-          animate={reduce ? undefined : { x: ["0%", "-50%"] }}
-          transition={reduce ? undefined : { duration: 18, ease: "linear", repeat: Infinity }}
-        >
-          <EcgTile id="a" />
-          <EcgTile id="b" />
-        </motion.div>
-      </motion.div>
     </div>
   );
 }
