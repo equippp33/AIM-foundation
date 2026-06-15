@@ -9,18 +9,19 @@ const labelClass =
 const inputClass =
   "mt-2 w-full rounded-lg border border-line bg-mist px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slatey-400 focus:border-brand-400 focus:bg-white focus:ring-2 focus:ring-brand-100";
 
-const empty = { name: "", email: "", phone: "", amount: "" };
+const empty = { name: "", email: "", phone: "", amount: "", company: "" };
 
 export function ExpressForm() {
   const [form, setForm] = useState(empty);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const update =
     (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
       setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const amount = Number(form.amount);
     if (!amount || amount % 10000 !== 0) {
@@ -28,7 +29,24 @@ export function ExpressForm() {
       return;
     }
     setError("");
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/express", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        setError(data?.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (submitted) {
@@ -64,6 +82,18 @@ export function ExpressForm() {
       className="mt-8 rounded-2xl border border-line bg-white p-7 shadow-soft sm:p-8"
       noValidate
     >
+      {/* Honeypot — hidden from users, bots tend to fill it */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={form.company}
+        onChange={update("company")}
+        className="hidden"
+      />
+
       <div>
         <label htmlFor="name" className={labelClass}>
           Full Name
@@ -136,8 +166,12 @@ export function ExpressForm() {
         <p className="mt-3 text-[13px] font-medium text-rose-600">{error}</p>
       )}
 
-      <button type="submit" className="btn-primary mt-7 w-full justify-center">
-        {express.submitLabel}
+      <button
+        type="submit"
+        disabled={loading}
+        className="btn-primary mt-7 w-full justify-center disabled:pointer-events-none disabled:opacity-60"
+      >
+        {loading ? "Sending…" : express.submitLabel}
       </button>
     </form>
   );

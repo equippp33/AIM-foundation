@@ -16,24 +16,46 @@ export function Infrastructure() {
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {infrastructure.features.map((f, i) => (
-            <div
-              key={f.title}
-              className="reveal card card-hover p-7"
-              style={{ transitionDelay: `${i * 90}ms` }}
-            >
-              <div className="flex items-start justify-between">
-                <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-500">
-                  <Icon name={f.icon as IconName} size={24} />
-                </span>
-                <span className="num text-slatey-400/60" style={{ fontSize: "15px", lineHeight: "18px" }}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+          {infrastructure.features.map((f, i) => {
+            const featured = (f as { featured?: boolean }).featured;
+            return (
+              <div
+                key={f.title}
+                className={`reveal p-7 transition-all duration-300 ${
+                  featured
+                    ? "rounded-2xl bg-gradient-to-br from-brand-500 to-brand-600 shadow-soft hover:-translate-y-1.5 hover:shadow-card-hover"
+                    : "card card-hover"
+                }`}
+                style={{ transitionDelay: `${i * 90}ms` }}
+              >
+                <div className="flex items-start justify-between">
+                  <span
+                    className={`grid h-12 w-12 place-items-center rounded-xl ${
+                      featured ? "bg-white/15 text-white" : "bg-brand-50 text-brand-500"
+                    }`}
+                  >
+                    <Icon name={f.icon as IconName} size={24} />
+                  </span>
+                  <span
+                    className={`num ${featured ? "text-white/50" : "text-slatey-400/60"}`}
+                    style={{ fontSize: "15px", lineHeight: "18px" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className={`mt-5 text-[16px] font-semibold ${featured ? "text-white" : "text-ink"}`}>
+                  {f.title}
+                </h3>
+                <p
+                  className={`mt-2 text-[13.5px] leading-relaxed ${
+                    featured ? "text-white/80" : "text-slatey-500"
+                  }`}
+                >
+                  {f.desc}
+                </p>
               </div>
-              <h3 className="mt-5 text-[16px] font-semibold text-ink">{f.title}</h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-slatey-500">{f.desc}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="reveal mt-8 flex flex-wrap gap-2.5">

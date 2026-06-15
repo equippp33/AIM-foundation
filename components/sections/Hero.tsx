@@ -54,15 +54,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator — pinned to the bottom so it doesn't offset centering */}
-      <div className="absolute inset-x-0 bottom-8 flex flex-col items-center gap-2">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slatey-400">
-          Scroll
-        </span>
-        <span className="grid h-7 w-7 animate-float place-items-center rounded-full border border-line bg-white text-brand-500">
-          <Icon name="arrow-down" size={14} />
-        </span>
-      </div>
     </section>
   );
 }

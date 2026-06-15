@@ -63,7 +63,7 @@ const config: Config = {
         navbar: "0 1px 0 rgba(16,33,80,0.06)",
       },
       maxWidth: {
-        container: "1200px",
+        container: "1320px",
       },
       keyframes: {
         "fade-up": {

@@ -16,34 +16,51 @@ export function Partnership() {
           {partnership.tiers.map((tier, i) => (
             <div
               key={tier.tag}
-              className="reveal relative overflow-hidden rounded-2xl bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
+              className={`reveal relative overflow-hidden rounded-2xl shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
+                tier.featured ? "bg-gradient-to-br from-brand-500 to-brand-600" : "bg-white"
+              }`}
               style={{ transitionDelay: `${i * 100}ms` }}
             >
               {tier.featured && (
-                <span className="absolute right-5 top-5 rounded-full bg-brand-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-600">
+                <span className="absolute right-5 top-5 rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-600">
                   Flagship
                 </span>
               )}
 
-              {/* Top accent bar */}
-              {tier.featured && (
-                <div className="h-1 w-full bg-gradient-to-r from-brand-500 to-brand-300" />
-              )}
-
               <div className="p-8">
-                <span className="text-[12px] font-semibold uppercase tracking-[0.16em] text-slatey-400">
+                <span
+                  className={`text-[12px] font-semibold uppercase tracking-[0.16em] ${
+                    tier.featured ? "text-white/70" : "text-slatey-400"
+                  }`}
+                >
                   {tier.tag}
                 </span>
-                <p className="num mt-2 text-ink">{tier.amount}</p>
-                <p className="mt-2 text-[15px] leading-relaxed text-slatey-500">{tier.pitch}</p>
+                <p className={`num mt-2 ${tier.featured ? "text-white" : "text-ink"}`}>{tier.amount}</p>
+                <p
+                  className={`mt-2 text-[15px] leading-relaxed ${
+                    tier.featured ? "text-white/85" : "text-slatey-500"
+                  }`}
+                >
+                  {tier.pitch}
+                </p>
 
                 <ul className="mt-6 space-y-3">
                   {tier.points.map((pt) => (
                     <li key={pt} className="flex items-start gap-3">
-                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-500">
+                      <span
+                        className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full ${
+                          tier.featured ? "bg-white/20 text-white" : "bg-brand-50 text-brand-500"
+                        }`}
+                      >
                         <Icon name="check" size={13} />
                       </span>
-                      <span className="text-[14px] leading-snug text-slatey-600">{pt}</span>
+                      <span
+                        className={`text-[14px] leading-snug ${
+                          tier.featured ? "text-white/90" : "text-slatey-600"
+                        }`}
+                      >
+                        {pt}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -52,7 +69,7 @@ export function Partnership() {
                   href="#contact"
                   className={`mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-semibold transition-all duration-300 active:scale-[0.98] ${
                     tier.featured
-                      ? "bg-brand-500 text-white hover:bg-brand-600 hover:shadow-soft"
+                      ? "bg-white text-brand-600 hover:bg-white/90"
                       : "border border-line bg-white text-ink hover:border-brand-300 hover:text-brand-600"
                   }`}
                 >

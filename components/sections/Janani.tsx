@@ -26,7 +26,13 @@ export function Janani() {
           </h3>
           <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
             {janani.numbers.map((n) => (
-              <StatCard key={n.label} value={n.value} label={n.label} tint={n.tint as any} />
+              <StatCard
+                key={n.label}
+                value={n.value}
+                label={n.label}
+                tint={n.tint as any}
+                featured={(n as { featured?: boolean }).featured}
+              />
             ))}
           </div>
         </div>

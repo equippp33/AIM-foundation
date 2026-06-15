@@ -72,7 +72,13 @@ export function MapAp() {
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {mapap.multiplier.map((m) => (
-              <StatCard key={m.label} value={m.value} label={m.label} tint={m.tint as any} />
+              <StatCard
+                key={m.label}
+                value={m.value}
+                label={m.label}
+                tint={m.tint as any}
+                featured={(m as { featured?: boolean }).featured}
+              />
             ))}
           </div>
         </div>

@@ -1,36 +1,25 @@
 import Image from "next/image";
 
 interface LogoProps {
+  /** "light" renders the wordmark in white for dark/colored backgrounds (e.g. footer). */
   variant?: "dark" | "light";
 }
 
 /**
- * AIM Foundation logo using the official AIG_logo.png mark.
- * Transparent background works naturally on both light (navbar)
- * and dark (footer) surfaces — no filter needed.
+ * AIM Foundation brand wordmark (AI Med Tech Alliance) — public/images/logo/AIM.webp.
+ * The file is the full lockup, so no accompanying text is rendered.
+ * On light surfaces it shows its native two-tone colours; on dark/colored
+ * surfaces ("light" variant) it is inverted to solid white for contrast.
  */
 export function Logo({ variant = "dark" }: LogoProps) {
-  const text = variant === "light" ? "text-white" : "text-ink";
-  const sub  = variant === "light" ? "text-white/55" : "text-slatey-400";
-
   return (
-    <span className="flex items-center gap-3">
-      <Image
-        src="/images/logo/AIG_logo.png"
-        alt="AIM Foundation logo"
-        width={44}
-        height={44}
-        className="h-11 w-11 object-contain"
-        priority
-      />
-      <span className="flex flex-col leading-none">
-        <span className={`font-display text-[19px] font-bold tracking-tight ${text}`}>
-          AIM<span className="text-brand-500"> Foundation</span>
-        </span>
-        <span className={`mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] ${sub}`}>
-          AI &amp; MedTech Alliance
-        </span>
-      </span>
-    </span>
+    <Image
+      src="/images/logo/AIM.webp"
+      alt="AI Med Tech Alliance"
+      width={1600}
+      height={653}
+      priority
+      className={`h-10 w-auto ${variant === "light" ? "brightness-0 invert" : ""}`}
+    />
   );
 }

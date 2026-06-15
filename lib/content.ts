@@ -48,6 +48,7 @@ export const infrastructure = {
       icon: "stethoscope",
       title: "Clinical Credibility",
       desc: "Anchored by AIG Hospitals and led by senior clinicians, every program is grounded in validated medical practice — never assumptions.",
+      featured: true,
     },
     {
       icon: "cpu",
@@ -190,7 +191,7 @@ export const janani = {
   ],
   numbers: [
     { value: "5,000+", label: "Women in pilot", tint: "brand" },
-    { value: "1,00,000", label: "FY 2026-27 target", tint: "green" },
+    { value: "1,00,000", label: "FY 2026-27 target", tint: "green", featured: true },
     { value: "500+", label: "ASHAs to be upskilled", tint: "amber" },
     { value: "Rs. 100", label: "Cost per beneficiary", tint: "blue" },
   ],
@@ -248,7 +249,7 @@ export const mapap = {
   costsTotal: { item: "Total Estimated Cost", cost: "₹29–35 L" },
   multiplier: [
     { value: "Rs. 5 Cr+", label: "AIG in-kind contribution", tint: "blue" },
-    { value: "15x", label: "Capital multiplier on your Rs. 30L", tint: "brand" },
+    { value: "15x", label: "Capital multiplier on your Rs. 30L", tint: "brand", featured: true },
     { value: "Rs. 3,000", label: "Cost per participant", tint: "green" },
   ],
   collectionTitle: "How Collection Works",
