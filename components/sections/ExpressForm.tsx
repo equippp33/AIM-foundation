@@ -79,7 +79,7 @@ export function ExpressForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="mt-8 rounded-2xl border border-line bg-white p-7 shadow-soft sm:p-8"
+      className="mt-5 rounded-2xl border border-line bg-white p-7 shadow-soft sm:p-8"
       noValidate
     >
       {/* Honeypot — hidden from users, bots tend to fill it */}

@@ -393,8 +393,6 @@ export const contact = {
 export const express = {
   badge: "Social Stock Exchange (SSE)",
   title: "Express Your Support",
-  subtitle:
-    "AIM Foundation is listing on SEBI's Social Stock Exchange. Pledge your contribution toward building healthcare infrastructure that reaches everyone.",
   amountLabel: "Amount (in multiples of ₹10,000)",
   submitLabel: "Express",
 };
