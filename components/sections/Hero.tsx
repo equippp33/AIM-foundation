@@ -2,6 +2,7 @@ import { hero } from "@/lib/content";
 import { Icon } from "@/components/ui/Icon";
 import { HeroBackground } from "@/components/sections/HeroBackground";
 import { HeadlineEcg } from "@/components/sections/HeadlineEcg";
+import { FeaturedPrograms } from "@/components/sections/FeaturedPrograms";
 
 export function Hero() {
   return (
@@ -27,7 +28,7 @@ export function Hero() {
       {/* Living healthcare-network animation (ECG pulse + AI particles + nodes) */}
       <HeroBackground />
 
-      <div className="container-x relative z-10 w-full py-24 lg:py-28">
+      <div className="container-x relative z-10 w-full py-12 lg:py-16">
         <div className="reveal relative mx-auto max-w-3xl text-center" style={{ isolation: "isolate" }}>
           <HeadlineEcg />
           <span className="inline-flex items-center gap-2.5 text-[12px] font-semibold uppercase tracking-[0.22em] text-brand-600">
@@ -41,21 +42,23 @@ export function Hero() {
             <span className="text-gradient">{hero.titleLine2}</span>
           </h1>
 
-          <p className="mt-7 mx-auto max-w-xl text-[16.5px] leading-relaxed text-slatey-500">
+          <p className="mt-5 mx-auto max-w-xl text-[16.5px] leading-relaxed text-slatey-500">
             {hero.lead}
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+        </div>
+
+        {/* Single container so CTA left-edge always aligns with the left card */}
+        <div className="reveal mx-auto mt-6 w-full max-w-[760px] lg:mt-7">
+          <FeaturedPrograms />
+          <div className="mt-5 flex flex-wrap items-center gap-4">
             <a href={hero.primaryCta.href} className="btn-primary">
               {hero.primaryCta.label}
               <Icon name="arrow-right" size={18} />
             </a>
-            <a
-              href={hero.secondaryCta.href}
-              className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-6 py-3.5 text-[15px] font-medium text-ink transition-colors hover:border-brand-300 hover:text-brand-600"
-            >
-              {hero.secondaryCta.label}
-            </a>
+            <span className="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-slatey-400">
+              {hero.complianceNote}
+            </span>
           </div>
         </div>
       </div>

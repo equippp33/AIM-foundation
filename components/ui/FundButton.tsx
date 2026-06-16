@@ -10,9 +10,11 @@ import { Icon } from "@/components/ui/Icon";
 export function FundButton({
   program,
   className,
+  label = "Fund this program",
 }: {
   program: string;
   className: string;
+  label?: string;
 }) {
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
@@ -22,7 +24,7 @@ export function FundButton({
 
   return (
     <a href="#express" onClick={handleClick} className={className}>
-      Fund this program
+      {label}
       <Icon name="arrow-right" size={18} />
     </a>
   );

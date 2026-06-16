@@ -32,17 +32,34 @@ export const nav = {
 export const hero = {
   eyebrow: "AI & MedTech Alliance Foundation",
   badge: "Registered Section 8 Non-Profit",
-  titleLine1: "Engineering the future of healthcare.",
-  titleLine2: "At Scale.",
-  lead: "We bridge clinical mastery, artificial intelligence and public health infrastructure to build scalable medical solutions across India — starting where the gap is most prominent.",
+  titleLine1: "Fund healthcare that",
+  titleLine2: "reaches the last mile.",
+  lead: "We turn CSR and Impact capital into deployed medical infrastructure across rural India — AI-powered maternal care and population-scale microbiome science, already validated in the field. Choose a program and fund it directly.",
   sub: "We work at the intersection of clinical credibility, AI-driven tools, and government reach — closing the execution gap that keeps good science from becoming real-world transformation.",
-  primaryCta: { label: "Partner With Us", href: "#express" },
+  primaryCta: { label: "Fund a Program", href: "#express" },
   secondaryCta: { label: "Explore Our Work", href: "#programs" },
+  complianceNote: "100% CSR-Eligible · Section 8 Non-Profit",
 };
 
-export const mission = {
-  quote:
-    "We exist at the intersection of clinical excellence, artificial intelligence, and public health reach — turning science and policy into systems that endure.",
+export const featuredPrograms = {
+  items: [
+    {
+      icon: "heart" as const,
+      title: "Janani Mitra",
+      program: "JANANI_MITRA",
+      desc: "AI-powered maternal health across Andhra Pradesh.",
+      amount: "₹1 Cr",
+      impact: "100,000 Women",
+    },
+    {
+      icon: "flask" as const,
+      title: "MAP-AP",
+      program: "MAP_AP",
+      desc: "India's first rural microbiome database.",
+      amount: "₹30 Lakhs",
+      impact: "10,000 Samples",
+    },
+  ],
 };
 
 export const partners = {
@@ -82,60 +99,50 @@ export const infrastructure = {
 };
 
 export const about = {
-  eyebrow: "Our Premise",
+  eyebrow: "Who We Are",
   title: "About AIM Foundation",
-  headlineLines: ["The gap isn't science.", "It isn't compassion.", "It's the system."],
   paragraphs: [
-    "India has brilliant doctors. Dedicated researchers. Government health workers walking miles to reach the last household. What it has lacked — in maternal care, in rural diagnostics, in population-scale data — is the connective infrastructure that carries all of this together.",
-    "That is the gap AIM Foundation was built to close. We are not a charity, and we don't distribute aid. We design, pilot, and operate the systems that make proven healthcare reach further — reliably, affordably, and long after the funding cycle ends.",
+    "AIM Foundation was built on a single conviction — that India's healthcare failures are not a shortage of science or compassion, but a shortage of the systems that carry proven care to the communities that need it.",
+    "We are a registered Section 8 non-profit working at the intersection of clinical excellence, artificial intelligence, and public health infrastructure — partnering with leading hospitals, research institutions, and government bodies to build systems that endure.",
   ],
-  premise: {
-    title: "Not a Charity",
-    body: "We don't distribute aid. We design, pilot, and operate the systems that carry proven healthcare further into the communities that need it.",
+  mission: {
+    title: "Our Mission",
+    body: "To engineer scalable, AI-powered healthcare infrastructure that carries clinical excellence and public health reach to every underserved community across India.",
   },
-  approach: {
-    title: "Built to Endure",
-    body: "Our systems are engineered for continuity — reliable, affordable, and independent of any single grant or funding cycle.",
+  vision: {
+    title: "Our Vision",
+    body: "A future where geography is no longer a barrier to healthcare — where every patient, regardless of where they live, receives the care they deserve.",
   },
   leadershipTitle: "Leadership",
-  leadershipHeading: "Built by clinicians. Guided by science.",
   leadership: [
     {
-      initial: "R",
       color: "brand",
       name: "Dr Rakesh Kalapala",
-      role: "Founder & President",
-      detail:
-        "Director at AIG Hospitals. Bridges the gap between frontline clinical practice and technology deployment — driving every AIM program from conception to the field.",
+      role: "Founder & President · Director, AIG Hospitals",
     },
     {
-      initial: "N",
       color: "green",
       name: "Dr D. Nageshwar Reddy",
-      role: "Board Advisor",
-      detail:
-        "Chairman of AIG Hospitals and one of India's most respected gastroenterologists. Provides the clinical oversight and strategic direction that gives every AIM initiative its institutional credibility.",
+      role: "Board Advisor · Chairman, AIG Hospitals",
     },
     {
-      initial: "S",
       color: "blue",
       name: "Dr Santanu Chattopadhyay",
-      role: "Science Lead, MAP-AP",
-      detail:
-        "Leads the microbiome research program at AIG's Barry Marshall Nobel Prize Centre — overseeing DNA sequencing, bioinformatics, and the scientific integrity of MAP-AP's 10,000-sample collection.",
+      role: "Science Lead, MAP-AP · AIG Barry Marshall Centre",
     },
   ],
-  milestonesTitle: "Where We Stand",
+  milestonesEyebrow: "Where We Stand",
   milestonesHeading: "Progress you can verify.",
+  milestonesIntro:
+    "Every milestone is documented, government-verified, and independently validated.",
   milestones: [
     { year: "S-8", text: "Registered as a Section 8 non-profit foundation" },
-    { year: "Pilot", text: "Janani Mitra validated across an initial cohort of 5,000 pregnant women" },
-    { year: "Gov", text: "Presented directly to the Hon'ble Chief Minister of Andhra Pradesh" },
-    { year: "Press", text: "Featured in Eenadu — independently validated in the field" },
-    { year: "MoU", text: "Primary health centre access secured across the Kuppam constituency for MAP-AP" },
+    { year: "Pilot", text: "Janani Mitra validated across 5,000 pregnant women" },
+    { year: "Gov", text: "Presented to the Chief Minister of Andhra Pradesh" },
+    { year: "MoU", text: "PHC access secured across Kuppam constituency for MAP-AP" },
     {
-      year: "26-27",
-      text: "FY 2026–27 target: scale Janani Mitra to 1,00,000 women",
+      year: "26–27",
+      text: "Scaling Janani Mitra to 1,00,000 women",
       status: "In Progress",
     },
   ],
@@ -177,86 +184,47 @@ export const impact = {
   ],
 };
 
-export const janani = {
-  tag: "Flagship Program",
-  title: "Janani Mitra",
-  subtitle: "A mother in a village. The same care as a metro hospital.",
-  intro:
-    "Every year, preventable complications claim the lives of mothers and newborns who never received a warning in time — not because the medicine doesn't exist, but because the system didn't reach them. Janani Mitra changes that equation.",
-  body: "The program places an AI health companion inside the government's own maternal health infrastructure. It monitors nutrition, identifies obstetric risk before it becomes a crisis, and escalates emergencies through a centralised command system — speaking to women in Telugu, in their own terms and context. It has been validated across an initial cohort of 5,000 pregnant women and presented directly to the Chief Minister of Andhra Pradesh.",
-  techTitle: "What the Program Does",
-  tech: [
-    "Real-time nutrition tracking with proactive dietary alerts",
-    "Automated obstetric risk identification",
-    "Telugu-language AI guidance and emergency chatbots",
-    "SOS escalation with defined command-centre protocols",
-    "Four-tier monitoring dashboards for ASHA supervisors",
-    "85%+ antenatal care compliance target",
-  ],
-  numbers: [
-    { value: "5,000+", label: "Women in the pilot cohort", tint: "brand" },
-    { value: "1,00,000", label: "Target for FY 2026–27", tint: "green", featured: true },
-    { value: "500+", label: "ASHAs to be trained & activated", tint: "amber" },
-    { value: "₹100", label: "Cost per beneficiary", tint: "blue" },
-  ],
-  quote:
-    "Presented directly to the Hon'ble Chief Minister of Andhra Pradesh. Featured in Eenadu. Independently validated in the field.",
+export const programsIntro = {
+  eyebrow: "Our Programs",
+  title: "Our Key Initiatives",
 };
 
-export const mapap = {
-  tag: "Research Program",
-  title: "MAP-AP",
-  subtitle: "India's biology deserves India's own data.",
-  lead: "India's first population-scale rural gut microbiome database.",
-  pipeline: ["Village", "PHC", "Collection", "Cold Chain", "AIG Lab", "Research"],
-  intro:
-    "The global microbiome research field is advancing rapidly, with institutions worldwide racing to build population-scale biological datasets. But almost none of that data reflects India's rural populations — people whose biology, diet, and disease patterns are distinct, and whose health challenges remain poorly understood. MAP-AP is changing that.",
-  body: "Conducted in Kuppam, Andhra Pradesh, the Microbiome Assessment Program collects 10,000 biological samples — blood, sputum, and stool — from a rural community. The science is led by Dr Santanu Chattopadhyay at AIG's Barry Marshall Nobel Prize Centre, government access across the Kuppam constituency is already secured, and AIG Hospitals is committing its full laboratory infrastructure — DNA sequencing, bioinformatics, and clinical oversight, a multi-crore in-kind investment already in place. What remains is the bridge between the village and the lab.",
-  contributionsTitle: "Partner Contributions",
-  contributions: [
-    {
-      party: "AIG Hospitals",
-      desc: "Full lab processing, DNA sequencing, bioinformatics, and clinical oversight under Dr Santanu Chattopadhyay — an in-kind investment running into multiple crores.",
-    },
-    {
-      party: "AP Government",
-      desc: "MoU for primary health centre access across the Kuppam constituency, with ASHA worker coordination for community enrolment and follow-up.",
-    },
-    {
-      party: "AIM Foundation",
-      desc: "End-to-end field operations: sample collection, cold-chain logistics, data capture, quality assurance, and transparent donor reporting.",
-    },
-  ],
-  fundingTitle: "Your ₹30 Lakhs — Exactly What It Funds",
-  fundingBody:
-    "AIG Hospitals is committing a multi-crore investment in lab infrastructure, sequencing, and analysis. Your ₹30 lakhs fund the field operations that collect and deliver 10,000 samples to those labs. Without field collection, world-class lab capacity sits idle; without the labs, the samples have no value. This funding is the bridge between the two.",
-  costs: [
-    {
-      item: "Collection kits & materials",
-      detail:
-        "10,000 sets — blood tubes, sputum cups, stool containers, labels, and biohazard packaging",
-      cost: "₹12–14 L",
-    },
-    {
-      item: "Field manpower (3 months)",
-      detail:
-        "Lab technicians across 10 PHCs, home-visit assistants, cold-chain transporters, and supervisors",
-      cost: "₹14–16 L",
-    },
-    {
-      item: "Cold-chain infrastructure & training",
-      detail:
-        "−80°C freezer storage, insulated shippers, temperature monitoring, and staff training",
-      cost: "₹3–5 L",
-    },
-  ],
-  costsTotal: { item: "Total Estimated Cost", cost: "₹29–35 L" },
-  multiplier: [
-    { value: "₹5 Cr+", label: "AIG's committed in-kind lab infrastructure", tint: "blue" },
-    { value: "15×", label: "Capital multiplier on partner investment", tint: "brand", featured: true },
-    { value: "₹3,000", label: "Cost per participant", tint: "green" },
-  ],
-};
+export const programs = [
+  {
+    id: "janani",
+    accent: "brand" as const,
+    icon: "heart" as const,
+    label: "Flagship Program",
+    name: "Janani Mitra",
+    tagline: "An AI companion for every pregnancy.",
+    description:
+      "Janani Mitra places an AI health companion inside government maternal health infrastructure — monitoring risk, escalating emergencies, and communicating with mothers in Telugu. Validated across 5,000 women. Presented to the Chief Minister of Andhra Pradesh.",
+    // Drop a file path here (e.g. "/images/programs/janani.jpg") to replace the
+    // branded placeholder with a real photo.
+    image: "/images/janani_mitra.png",
+    metrics: [
+      { value: "5,000+", label: "Women in pilot" },
+      { value: "1,00,000", label: "Target FY 2026–27" },
+      { value: "₹100", label: "Per beneficiary" },
+    ],
+  },
+  {
+    id: "mapap",
+    accent: "green" as const,
+    icon: "flask" as const,
+    label: "Research Program",
+    name: "MAP-AP",
+    tagline: "India's first rural gut microbiome database.",
+    description:
+      "MAP-AP collects 10,000 biological samples from rural Andhra Pradesh — building the biomedical foundation India's future diagnostics will be designed from. Led by Dr. Santanu Chattopadhyay at AIG's Barry Marshall Nobel Prize Centre.",
+    image: "/images/map-ap.webp",
+    metrics: [
+      { value: "10,000", label: "Biological samples" },
+      { value: "15×", label: "Capital multiplier" },
+      { value: "₹5 Cr+", label: "AIG in-kind infrastructure" },
+    ],
+  },
+];
 
 export const governance = {
   eyebrow: "Accountability",

@@ -1,15 +1,10 @@
 import { Navbar } from "@/components/Navbar";
 import { RevealProvider } from "@/components/RevealProvider";
 import { Hero } from "@/components/sections/Hero";
-import { Mission } from "@/components/sections/Mission";
-import { Partners } from "@/components/sections/Partners";
-import { Infrastructure } from "@/components/sections/Infrastructure";
 import { About } from "@/components/sections/About";
-import { Leadership } from "@/components/sections/Leadership";
-import { Milestones } from "@/components/sections/Milestones";
-import { Impact } from "@/components/sections/Impact";
-import { Janani } from "@/components/sections/Janani";
-import { MapAp } from "@/components/sections/MapAp";
+import { Partners } from "@/components/sections/Partners";
+import { PressSection } from "@/components/aim-press/PressSection";
+import { Programs } from "@/components/sections/Programs";
 import { Governance } from "@/components/sections/Governance";
 import { Partnership } from "@/components/sections/Partnership";
 import { Express } from "@/components/sections/Express";
@@ -37,18 +32,10 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        <Mission />
-        <Partners />
-        <Infrastructure />
         <About />
-        <Leadership />
-        <Milestones />
-        <Impact />
-        {/* Programs anchor wraps both flagship projects */}
-        <div id="programs">
-          <Janani />
-          <MapAp />
-        </div>
+        <Partners />
+        <PressSection />
+        <Programs />
         <Governance />
         <Partnership />
         <Express />
