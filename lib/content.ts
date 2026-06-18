@@ -44,14 +44,6 @@ export const hero = {
 export const featuredPrograms = {
   items: [
     {
-      icon: "heart" as const,
-      title: "Janani Mitra",
-      program: "JANANI_MITRA",
-      desc: "AI-powered maternal health across Andhra Pradesh.",
-      amount: "₹1 Cr",
-      impact: "100,000 Women",
-    },
-    {
       icon: "flask" as const,
       title: "MAP-AP",
       program: "MAP_AP",
@@ -136,15 +128,10 @@ export const about = {
   milestonesIntro:
     "Every milestone is documented, government-verified, and independently validated.",
   milestones: [
-    { year: "S-8", text: "Registered as a Section 8 non-profit foundation" },
-    { year: "Pilot", text: "Janani Mitra validated across 5,000 pregnant women" },
-    { year: "Gov", text: "Presented to the Chief Minister of Andhra Pradesh" },
-    { year: "MoU", text: "PHC access secured across Kuppam constituency for MAP-AP" },
-    {
-      year: "26–27",
-      text: "Scaling Janani Mitra to 1,00,000 women",
-      status: "In Progress",
-    },
+    { year: "S-8", text: "Registered as a Section 8 non-profit foundation", url: "https://www.aimfoundation.ai/#about" },
+    { year: "Gov", text: "Presented to the Chief Minister of Andhra Pradesh", url: "https://revealinside.in/ap-cm-chandrababu-naidu-teams/" },
+    { year: "Press", text: "Featured in Eenadu — independently validated in the field", url: "https://www.andhrajyothy.com/2025/andhra-pradesh/aipowered-janani-mitra-app-launched-to-prevent-anemia-and-maternalinfant-mortality-1371345.html" },
+    { year: "MoU", text: "PHC access secured across Kuppam constituency for MAP-AP", url: "https://www.aimfoundation.ai/#programs" },
   ],
 };
 
@@ -190,24 +177,6 @@ export const programsIntro = {
 };
 
 export const programs = [
-  {
-    id: "janani",
-    accent: "brand" as const,
-    icon: "heart" as const,
-    label: "Flagship Program",
-    name: "Janani Mitra",
-    tagline: "An AI companion for every pregnancy.",
-    description:
-      "Janani Mitra places an AI health companion inside government maternal health infrastructure — monitoring risk, escalating emergencies, and communicating with mothers in Telugu. Validated across 5,000 women. Presented to the Chief Minister of Andhra Pradesh.",
-    // Drop a file path here (e.g. "/images/programs/janani.jpg") to replace the
-    // branded placeholder with a real photo.
-    image: "/images/janani_mitra.png",
-    metrics: [
-      { value: "5,000+", label: "Women in pilot" },
-      { value: "1,00,000", label: "Target FY 2026–27" },
-      { value: "₹100", label: "Per beneficiary" },
-    ],
-  },
   {
     id: "mapap",
     accent: "green" as const,
@@ -263,21 +232,6 @@ export const partnership = {
   subtitle:
     "Whether you lead a CSR fund, a family office, a healthcare institution, or a government initiative — there is a structured, accountable entry point built for you.",
   tiers: [
-    {
-      tag: "Janani Mitra",
-      program: "JANANI_MITRA",
-      amount: "₹1 Crore",
-      pitch: "Scale validated AI maternal health to 1,00,000 women across Andhra Pradesh.",
-      points: [
-        "Validated pilot — 5,000 women already tracked",
-        "Presented to the Chief Minister of Andhra Pradesh",
-        "₹100 per beneficiary — exceptional unit economics",
-        "500+ ASHAs upskilled and activated",
-        "Featured in national media (Eenadu), with visibility included",
-        "Full CSR compliance reporting and site access",
-      ],
-      featured: true,
-    },
     {
       tag: "MAP-AP",
       program: "MAP_AP",
@@ -361,9 +315,7 @@ export const footer = {
     {
       title: "Programs",
       links: [
-        { label: "Janani Mitra", href: "#janani" },
         { label: "MAP-AP", href: "#mapap" },
-        { label: "Maternal Health AI", href: "#janani" },
         { label: "Microbiome Database", href: "#mapap" },
       ],
     },

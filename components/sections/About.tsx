@@ -104,7 +104,19 @@ export function About() {
                     {m.year}
                   </span>
                   <div className="flex flex-wrap items-center gap-2.5">
-                    <p className="text-[14.5px] font-semibold leading-snug text-ink">{m.text}</p>
+                    {m.url ? (
+                      <a
+                        href={m.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1.5 text-[14.5px] font-semibold leading-snug text-ink hover:text-brand-600 transition-colors"
+                      >
+                        {m.text}
+                        <Icon name="external-link" size={12} className="opacity-0 group-hover:opacity-100 transition-opacity text-brand-500" />
+                      </a>
+                    ) : (
+                      <p className="text-[14.5px] font-semibold leading-snug text-ink">{m.text}</p>
+                    )}
                     {m.status && (
                       <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700">
                         <Icon name="spark" size={11} />
