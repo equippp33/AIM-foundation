@@ -4,8 +4,7 @@ import { featuredPrograms } from "@/lib/content";
 import { Icon } from "@/components/ui/Icon";
 
 function selectProgram(program: string) {
-  window.dispatchEvent(new CustomEvent("aim:select-program", { detail: program }));
-  document.getElementById("express")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.location.href = `/express?program=${program}`;
 }
 
 /**
@@ -21,7 +20,7 @@ export function FeaturedPrograms() {
       {featuredPrograms.items.map((item) => (
         <a
           key={item.program}
-          href="#express"
+          href={`/express?program=${item.program}`}
           onClick={(e) => {
             e.preventDefault();
             selectProgram(item.program);

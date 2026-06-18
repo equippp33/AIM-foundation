@@ -16,14 +16,8 @@ export function FundButton({
   className: string;
   label?: string;
 }) {
-  function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
-    window.dispatchEvent(new CustomEvent("aim:select-program", { detail: program }));
-    document.getElementById("express")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   return (
-    <a href="#express" onClick={handleClick} className={className}>
+    <a href="/express" className={className}>
       {label}
       <Icon name="arrow-right" size={18} />
     </a>

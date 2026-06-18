@@ -42,23 +42,23 @@ export function About() {
           <span className="heading-underline" />
         </div>
 
-        {/* Row 1 — story + mission/vision | leadership carousel */}
-        <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="reveal">
-            <div className="space-y-5">
-              {about.paragraphs.map((p) => (
-                <p key={p} className="text-[16px] leading-relaxed text-slatey-600">
-                  {p}
-                </p>
-              ))}
-            </div>
-            <div className="mt-8 space-y-5">
-              <InfoCard title={about.mission.title} body={about.mission.body} accent="brand" />
-              <InfoCard title={about.vision.title} body={about.vision.body} accent="green" />
-            </div>
+        {/* Paragraphs — full width, side by side */}
+        <div className="reveal mt-14 grid gap-8 lg:grid-cols-2 lg:gap-16">
+          {about.paragraphs.map((p) => (
+            <p key={p} className="text-[16px] leading-relaxed text-slatey-600">
+              {p}
+            </p>
+          ))}
+        </div>
+
+        {/* Row 2 — mission/vision | leadership carousel */}
+        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
+          <div className="reveal space-y-5">
+            <InfoCard title={about.mission.title} body={about.mission.body} accent="brand" />
+            <InfoCard title={about.vision.title} body={about.vision.body} accent="green" />
           </div>
 
-          <div className="reveal" style={{ transitionDelay: "120ms" }}>
+          <div className="reveal">
             <ColumnLabel>{about.leadershipTitle}</ColumnLabel>
             <div className="mt-4">
               <LeadershipCarousel leaders={about.leadership} />

@@ -23,10 +23,10 @@ export const nav = {
     { label: "Programs", href: "#programs" },
     { label: "Impact", href: "#impact" },
     { label: "Governance", href: "#governance" },
-    { label: "Contact", href: "#express" },
+    { label: "Contact", href: "/express" },
   ],
   secondaryCta: { label: "Explore our work", href: "#programs" },
-  cta: { label: "Express Now", href: "#express" },
+  cta: { label: "Express Now", href: "/express" },
 };
 
 export const hero = {
@@ -36,13 +36,21 @@ export const hero = {
   titleLine2: "reaches the last mile.",
   lead: "We turn CSR and Impact capital into deployed medical infrastructure across rural India — AI-powered maternal care and population-scale microbiome science, already validated in the field. Choose a program and fund it directly.",
   sub: "We work at the intersection of clinical credibility, AI-driven tools, and government reach — closing the execution gap that keeps good science from becoming real-world transformation.",
-  primaryCta: { label: "Fund a Program", href: "#express" },
+  primaryCta: { label: "Fund a Program", href: "/express" },
   secondaryCta: { label: "Explore Our Work", href: "#programs" },
   complianceNote: "100% CSR-Eligible · Section 8 Non-Profit",
 };
 
 export const featuredPrograms = {
   items: [
+    {
+      icon: "heart" as const,
+      title: "Janani Mitra",
+      program: "JANANI_MITRA",
+      desc: "AI-powered maternal health across Andhra Pradesh.",
+      amount: "₹1 Cr",
+      impact: "100,000 Women",
+    },
     {
       icon: "flask" as const,
       title: "MAP-AP",
@@ -128,9 +136,9 @@ export const about = {
   milestonesIntro:
     "Every milestone is documented, government-verified, and independently validated.",
   milestones: [
-    { year: "S-8", text: "Registered as a Section 8 non-profit foundation", url: "https://www.aimfoundation.ai/#about" },
-    { year: "Gov", text: "Presented to the Chief Minister of Andhra Pradesh", url: "https://revealinside.in/ap-cm-chandrababu-naidu-teams/" },
-    { year: "Press", text: "Featured in Eenadu — independently validated in the field", url: "https://www.andhrajyothy.com/2025/andhra-pradesh/aipowered-janani-mitra-app-launched-to-prevent-anemia-and-maternalinfant-mortality-1371345.html" },
+    { year: "S-8", text: "Registered as a Section 8 non-profit foundation", url: "https://www.linkedin.com/company/ai-medtech-alliance/?originalSubdomain=in" },
+    { year: "Gov", text: "Presented to the Chief Minister of Andhra Pradesh", url: "https://www.thehindu.com/news/national/andhra-pradesh/chief-minister-chandrababu-naidu-opens-andhra-pradeshs-first-digital-nerve-centre-in-kuppam/article69768296.ece" },
+    { year: "Press", text: "Featured in Eenadu — independently validated in the field", url: "https://www.aimfoundation.ai/media" },
     { year: "MoU", text: "PHC access secured across Kuppam constituency for MAP-AP", url: "https://www.aimfoundation.ai/#programs" },
   ],
 };

@@ -32,18 +32,13 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Pre-select a program when a "Fund this program" button is clicked elsewhere
-  // on the page (see FundButton).
+  // Pre-select a program from the ?program= query param (set by FeaturedPrograms / FundButton).
   useEffect(() => {
-    const onSelect = (e: Event) => {
-      const code = (e as CustomEvent<string>).detail;
-      if (isProjectCode(code)) {
-        setForm((f) => ({ ...f, project: code }));
-        setSubmitted(false);
-      }
-    };
-    window.addEventListener("aim:select-program", onSelect as EventListener);
-    return () => window.removeEventListener("aim:select-program", onSelect as EventListener);
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("program");
+    if (code && isProjectCode(code)) {
+      setForm((f) => ({ ...f, project: code }));
+    }
   }, []);
 
   const labelClass = `block text-[11px] font-semibold uppercase tracking-[0.16em] ${

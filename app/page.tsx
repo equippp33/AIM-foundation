@@ -7,7 +7,6 @@ import { PressSection } from "@/components/aim-press/PressSection";
 import { Programs } from "@/components/sections/Programs";
 import { Governance } from "@/components/sections/Governance";
 import { Partnership } from "@/components/sections/Partnership";
-import { Express } from "@/components/sections/Express";
 import { Footer } from "@/components/sections/Footer";
 import { site } from "@/lib/content";
 
@@ -38,7 +37,6 @@ export default function HomePage() {
         <Programs />
         <Governance />
         <Partnership />
-        <Express />
       </main>
       <Footer />
     </RevealProvider>
