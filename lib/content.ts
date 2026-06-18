@@ -136,10 +136,10 @@ export const about = {
   milestonesIntro:
     "Every milestone is documented, government-verified, and independently validated.",
   milestones: [
-    { year: "S-8", text: "Registered as a Section 8 non-profit foundation", url: "https://www.linkedin.com/company/ai-medtech-alliance/?originalSubdomain=in" },
-    { year: "Gov", text: "Presented to the Chief Minister of Andhra Pradesh", url: "https://www.thehindu.com/news/national/andhra-pradesh/chief-minister-chandrababu-naidu-opens-andhra-pradeshs-first-digital-nerve-centre-in-kuppam/article69768296.ece" },
-    { year: "Press", text: "Featured in Eenadu — independently validated in the field", url: "https://www.aimfoundation.ai/media" },
-    { year: "MoU", text: "PHC access secured across Kuppam constituency for MAP-AP", url: "https://www.aimfoundation.ai/#programs" },
+    { year: "S-8", text: "Registered as a Section 8 non-profit foundation", url: "https://www.linkedin.com/company/ai-medtech-alliance/?originalSubdomain=in", status: undefined },
+    { year: "Gov", text: "Presented to the Chief Minister of Andhra Pradesh", url: "https://www.thehindu.com/news/national/andhra-pradesh/chief-minister-chandrababu-naidu-opens-andhra-pradeshs-first-digital-nerve-centre-in-kuppam/article69768296.ece", status: undefined },
+    { year: "Press", text: "Featured in Eenadu — independently validated in the field", url: "https://www.aimfoundation.ai/media", status: undefined },
+    { year: "MoU", text: "PHC access secured across Kuppam constituency for MAP-AP", url: "https://www.aimfoundation.ai/#programs", status: undefined },
   ],
 };
 
