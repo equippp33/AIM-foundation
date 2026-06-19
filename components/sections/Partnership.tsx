@@ -1,5 +1,4 @@
 import { partnership } from "@/lib/content";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Icon } from "@/components/ui/Icon";
 import { FundButton } from "@/components/ui/FundButton";
 
@@ -7,20 +6,26 @@ export function Partnership() {
   return (
     <section id="partnership" className="section bg-white">
       <div className="container-x">
-        <SectionHeading
-          eyebrow={partnership.eyebrow}
-          title={partnership.title}
-          subtitle={partnership.subtitle}
-        />
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow">{partnership.eyebrow}</span>
+          <h2 className="mt-3 font-display text-[34px] leading-tight text-ink sm:text-[42px]">
+            {partnership.title}
+          </h2>
+          <div className="heading-underline" />
+          {partnership.subtitle && (
+            <p className="mt-6 text-[16px] leading-relaxed text-slatey-500">
+              {partnership.subtitle}
+            </p>
+          )}
+        </div>
 
         <div className="mt-14 grid gap-7 lg:grid-cols-2">
-          {partnership.tiers.map((tier, i) => (
+          {partnership.tiers.map((tier) => (
             <div
               key={tier.tag}
-              className={`reveal relative overflow-hidden rounded-2xl shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
+              className={`relative overflow-hidden rounded-2xl shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
                 tier.featured ? "bg-gradient-to-br from-brand-500 to-brand-600" : "bg-white"
               }`}
-              style={{ transitionDelay: `${i * 100}ms` }}
             >
               {tier.featured && (
                 <span className="absolute right-5 top-5 rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-600">

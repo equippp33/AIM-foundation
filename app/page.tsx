@@ -5,7 +5,6 @@ import { About } from "@/components/sections/About";
 import { Partners } from "@/components/sections/Partners";
 import { PressSection } from "@/components/aim-press/PressSection";
 import { Programs } from "@/components/sections/Programs";
-import { Governance } from "@/components/sections/Governance";
 import { Partnership } from "@/components/sections/Partnership";
 import { Footer } from "@/components/sections/Footer";
 import { site } from "@/lib/content";
@@ -35,7 +34,6 @@ export default function HomePage() {
         <Partners />
         <PressSection />
         <Programs />
-        <Governance />
         <Partnership />
       </main>
       <Footer />

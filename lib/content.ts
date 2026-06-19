@@ -21,8 +21,6 @@ export const nav = {
     { label: "How We Work", href: "#infrastructure" },
     { label: "About", href: "#about" },
     { label: "Programs", href: "#programs" },
-    { label: "Impact", href: "#impact" },
-    { label: "Governance", href: "#governance" },
     { label: "Contact", href: "/express" },
   ],
   secondaryCta: { label: "Explore our work", href: "#programs" },
@@ -32,11 +30,11 @@ export const nav = {
 export const hero = {
   eyebrow: "AI & MedTech Alliance Foundation",
   badge: "Registered Section 8 Non-Profit",
-  titleLine1: "Fund healthcare that",
+  titleLine1: "Support healthcare that",
   titleLine2: "reaches the last mile.",
-  lead: "We turn CSR and Impact capital into deployed medical infrastructure across rural India — AI-powered maternal care and population-scale microbiome science, already validated in the field. Choose a program and fund it directly.",
+  lead: "We turn CSR and Impact capital into deployed medical infrastructure across rural India — AI-powered maternal care and population-scale microbiome science, already validated in the field. Choose a program and support it directly.",
   sub: "We work at the intersection of clinical credibility, AI-driven tools, and government reach — closing the execution gap that keeps good science from becoming real-world transformation.",
-  primaryCta: { label: "Fund a Program", href: "/express" },
+  primaryCta: { label: "Support a Program", href: "/express" },
   secondaryCta: { label: "Explore Our Work", href: "#programs" },
   complianceNote: "100% CSR-Eligible · Section 8 Non-Profit",
 };
@@ -186,6 +184,22 @@ export const programsIntro = {
 
 export const programs = [
   {
+    id: "janani",
+    accent: "brand" as const,
+    icon: "heart" as const,
+    label: "Flagship Program",
+    name: "Janani Mitra",
+    tagline: "An AI companion for every pregnancy.",
+    description:
+      "Janani Mitra places an AI health companion inside government maternal health infrastructure — monitoring risk, escalating emergencies, and communicating with mothers in Telugu. Validated across 5,000 women. Presented to the Chief Minister of Andhra Pradesh.",
+    image: "/images/janani_mitra.png",
+    metrics: [
+      { value: "5,000+", label: "Women in pilot" },
+      { value: "1,00,000", label: "Target FY 2026–27" },
+      { value: "₹100", label: "Per beneficiary" },
+    ],
+  },
+  {
     id: "mapap",
     accent: "green" as const,
     icon: "flask" as const,
@@ -194,7 +208,7 @@ export const programs = [
     tagline: "India's first rural gut microbiome database.",
     description:
       "MAP-AP collects 10,000 biological samples from rural Andhra Pradesh — building the biomedical foundation India's future diagnostics will be designed from. Led by Dr. Santanu Chattopadhyay at AIG's Barry Marshall Nobel Prize Centre.",
-    image: "/images/map-ap.webp",
+    image: "/images/map-ap-new.jpg",
     metrics: [
       { value: "10,000", label: "Biological samples" },
       { value: "15×", label: "Capital multiplier" },
@@ -240,6 +254,21 @@ export const partnership = {
   subtitle:
     "Whether you lead a CSR fund, a family office, a healthcare institution, or a government initiative — there is a structured, accountable entry point built for you.",
   tiers: [
+    {
+      tag: "Janani Mitra",
+      program: "JANANI_MITRA",
+      amount: "₹1 Crore",
+      pitch: "Scale validated AI maternal health to 1,00,000 women across Andhra Pradesh.",
+      points: [
+        "Validated pilot — 5,000 women already tracked",
+        "Presented to the Chief Minister of Andhra Pradesh",
+        "₹100 per beneficiary — exceptional unit economics",
+        "500+ ASHAs upskilled and activated",
+        "Featured in national media (Eenadu), with visibility included",
+        "Full CSR compliance reporting and site access",
+      ],
+      featured: true,
+    },
     {
       tag: "MAP-AP",
       program: "MAP_AP",
@@ -315,14 +344,13 @@ export const footer = {
       links: [
         { label: "About", href: "#about" },
         { label: "Programs", href: "#programs" },
-        { label: "Impact", href: "#impact" },
-        { label: "Governance", href: "#governance" },
         { label: "Express Now", href: "/express" },
       ],
     },
     {
       title: "Programs",
       links: [
+        { label: "Janani Mitra", href: "#janani" },
         { label: "MAP-AP", href: "#mapap" },
         { label: "Microbiome Database", href: "#mapap" },
       ],

@@ -29,14 +29,17 @@ export function Hero() {
       <HeroBackground />
 
       <div className="container-x relative z-10 w-full py-12 lg:py-16">
-        <div className="reveal relative mx-auto max-w-3xl text-center" style={{ isolation: "isolate" }}>
+        <div className="reveal relative mx-auto max-w-4xl text-center" style={{ isolation: "isolate" }}>
           <HeadlineEcg />
           <span className="inline-flex items-center gap-2.5 text-[12px] font-semibold uppercase tracking-[0.22em] text-brand-600">
             <span className="h-px w-7 bg-brand-500" />
             {hero.eyebrow}
           </span>
 
-          <h1 className="mt-6 font-display text-[44px] font-bold leading-[1.04] text-ink sm:text-[60px] lg:text-[68px]">
+          <h1
+            className="mt-6 font-display font-bold leading-[1.04] text-ink"
+            style={{ fontSize: "clamp(2rem, 5.5vw, 4.25rem)" }}
+          >
             {hero.titleLine1}
             <br />
             <span className="text-gradient">{hero.titleLine2}</span>

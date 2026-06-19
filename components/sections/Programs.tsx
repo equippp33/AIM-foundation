@@ -42,8 +42,13 @@ type Program = {
 const PROGRAMS: Program[] = [
   {
     ...(programs[0] as Program),
+    imagePosition: "object-top",
+    caption: "Beneficiary — Janani Mitra pilot cohort, Andhra Pradesh",
+  },
+  {
+    ...(programs[1] as Program),
     imagePosition: "object-center",
-    caption: "MoU signing — AIM Foundation & Government of Andhra Pradesh",
+    caption: "Inauguration — Centre for Microbiome Research India, AIG Hospitals",
   },
 ];
 
@@ -127,8 +132,8 @@ function ProgramRow({ program, index }: { program: Program; index: number }) {
         {/* Learn more */}
         <div className="mt-7 border-t border-line pt-5">
           <FundButton
-            program="MAP_AP"
-            label="Learn more"
+            program={program.id === "janani" ? "JANANI_MITRA" : "MAP_AP"}
+            label="Support"
             className={`inline-flex items-center gap-1.5 text-[14px] font-semibold transition-colors ${a.link}`}
           />
         </div>
