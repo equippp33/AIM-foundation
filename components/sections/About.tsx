@@ -112,7 +112,7 @@ export function About() {
                         className="group inline-flex items-center gap-1.5 text-[14.5px] font-semibold leading-snug text-ink hover:text-brand-600 transition-colors"
                       >
                         {m.text}
-                        <Icon name="external-link" size={12} className="opacity-0 group-hover:opacity-100 transition-opacity text-brand-500" />
+                        <Icon name="external-link" size={12} className="text-brand-400 group-hover:text-brand-600 transition-colors" />
                       </a>
                     ) : (
                       <p className="text-[14.5px] font-semibold leading-snug text-ink">{m.text}</p>
