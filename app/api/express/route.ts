@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { createServerSupabaseClient } from "@/lib/supabase-server";
+import pool from "@/lib/db";
 import { isProjectCode, projectLabel } from "@/lib/projects";
 
 export const runtime = "nodejs";
@@ -61,30 +61,17 @@ export async function POST(req: Request) {
   const project = projectRaw || null;
   const projectName = projectLabel(projectRaw);
 
-  // ── 1. Persist to Supabase ────────────────────────────────────────────────
+  // ── 1. Persist to RDS ─────────────────────────────────────────────────────
   try {
-    const supabase = createServerSupabaseClient();
-    const { error: dbError } = await supabase.from("sse_pledges").insert({
-      name,
-      email,
-      phone,
-      amount: amountNum,
-      project: project || null,
-      // status starts as 'pending'; can be updated to 'confirmed' / 'cancelled'
-      status: "pending",
-    });
-
-    if (dbError) {
-      console.error("Supabase insert error:", dbError);
-      return NextResponse.json(
-        { error: "Could not save your pledge. Please try again." },
-        { status: 500 }
-      );
-    }
+    await pool.query(
+      `INSERT INTO public.sse_pledges (name, email, phone, amount, project, status)
+       VALUES ($1, $2, $3, $4, $5::project_type, $6)`,
+      [name, email, phone, amountNum, project, "pending"]
+    );
   } catch (dbErr) {
-    console.error("Supabase client error:", dbErr);
+    console.error("DB insert error:", dbErr);
     return NextResponse.json(
-      { error: "Database connection failed. Please try again." },
+      { error: "Could not save your submission. Please try again." },
       { status: 500 }
     );
   }
