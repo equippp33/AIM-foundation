@@ -5,6 +5,18 @@ import { express } from "@/lib/content";
 import { isProjectCode, projectLabel } from "@/lib/projects";
 import { Icon } from "@/components/ui/Icon";
 
+const COUNTRY_CODES = [
+  { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+1",  flag: "🇺🇸", name: "USA" },
+  { code: "+44", flag: "🇬🇧", name: "UK" },
+  { code: "+971", flag: "🇦🇪", name: "UAE" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+61", flag: "🇦🇺", name: "Australia" },
+  { code: "+1",  flag: "🇨🇦", name: "Canada" },
+  { code: "+49", flag: "🇩🇪", name: "Germany" },
+  { code: "+81", flag: "🇯🇵", name: "Japan" },
+];
+
 type Tone = "light" | "dark";
 
 type FormState = {
@@ -27,6 +39,7 @@ const empty: FormState = {
 
 export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
   const dark = tone === "dark";
+  const [dialCode, setDialCode] = useState("+91");
   const [form, setForm] = useState(empty);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,7 +57,7 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
   const labelClass = `block text-[11px] font-semibold uppercase tracking-[0.16em] ${
     dark ? "text-white/55" : "text-slatey-500"
   }`;
-  const inputClass = `mt-2 w-full rounded-lg px-4 py-3 text-[15px] outline-none transition ${
+  const inputClass = `mt-1.5 w-full rounded-lg px-3 py-2 text-[13px] outline-none transition ${
     dark
       ? "border border-white/15 bg-white/[0.04] text-white placeholder:text-white/35 focus:border-brand-400 focus:bg-white/[0.07] focus:ring-2 focus:ring-brand-500/30"
       : "border border-line bg-mist text-ink placeholder:text-slatey-400 focus:border-brand-400 focus:bg-white focus:ring-2 focus:ring-brand-100"
@@ -68,7 +81,7 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
       const res = await fetch("/api/express", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, phone: `${dialCode} ${form.phone}` }),
       });
       if (!res.ok) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
@@ -86,17 +99,17 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
   if (submitted) {
     return (
       <div
-        className={`rounded-2xl p-8 text-center shadow-soft ${
+        className={`rounded-2xl p-6 text-center shadow-soft ${
           dark ? "border border-white/10 bg-white/[0.03]" : "border border-line bg-white"
         }`}
       >
-        <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-emerald-500/15 text-emerald-400">
-          <Icon name="check" size={24} />
+        <span className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-emerald-500/15 text-emerald-400">
+          <Icon name="check" size={20} />
         </span>
-        <h3 className={`mt-4 font-display text-[22px] ${dark ? "text-white" : "text-ink"}`}>
+        <h3 className={`mt-3 font-display text-[18px] ${dark ? "text-white" : "text-ink"}`}>
           Thank you, {form.name || "friend"}!
         </h3>
-        <p className={`mt-2 text-[14.5px] leading-relaxed ${dark ? "text-white/65" : "text-slatey-500"}`}>
+        <p className={`mt-2 text-[13px] leading-relaxed ${dark ? "text-white/65" : "text-slatey-500"}`}>
           Your expression of interest in <strong>{projectLabel(form.project)}</strong> has been recorded. Our team
           will reach out shortly to discuss your partnership.
         </p>
@@ -117,7 +130,7 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
   return (
     <form
       onSubmit={onSubmit}
-      className={`rounded-2xl p-7 shadow-soft sm:p-8 ${
+      className={`rounded-2xl p-4 shadow-soft ${
         dark ? "border border-white/10 bg-white/[0.03]" : "border border-line bg-white"
       }`}
       noValidate
@@ -151,20 +164,42 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
       </div>
 
       {/* Phone + Email */}
-      <div className="mt-5 grid gap-5 sm:grid-cols-2">
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
         <div>
           <label htmlFor="ef-phone" className={labelClass}>
             {express.phoneLabel} <span className="text-brand-400">*</span>
           </label>
-          <input
-            id="ef-phone"
-            type="tel"
-            required
-            value={form.phone}
-            onChange={update("phone")}
-            placeholder="+91 00000 00000"
-            className={inputClass}
-          />
+          <div className="mt-1.5 flex">
+            <select
+              value={dialCode}
+              onChange={(e) => setDialCode(e.target.value)}
+              aria-label="Country code"
+              className={`shrink-0 rounded-l-lg border-y border-l pr-1 pl-3 text-[13px] outline-none transition ${
+                dark
+                  ? "border-white/15 bg-white/[0.04] text-white focus:border-brand-400"
+                  : "border-line bg-mist text-ink focus:border-brand-400"
+              }`}
+            >
+              {COUNTRY_CODES.map((c) => (
+                <option key={c.name} value={c.code}>
+                  {c.flag} {c.code}
+                </option>
+              ))}
+            </select>
+            <input
+              id="ef-phone"
+              type="tel"
+              required
+              value={form.phone}
+              onChange={update("phone")}
+              placeholder="98765 43210"
+              className={`min-w-0 flex-1 rounded-r-lg border-y border-r px-3 py-2 text-[13px] outline-none transition ${
+                dark
+                  ? "border-white/15 bg-white/[0.04] text-white placeholder:text-white/35 focus:border-brand-400 focus:bg-white/[0.07] focus:ring-2 focus:ring-brand-500/30"
+                  : "border-line bg-mist text-ink placeholder:text-slatey-400 focus:border-brand-400 focus:bg-white focus:ring-2 focus:ring-brand-100"
+              }`}
+            />
+          </div>
         </div>
         <div>
           <label htmlFor="ef-email" className={labelClass}>
@@ -183,11 +218,11 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
       </div>
 
       {/* Project of interest */}
-      <fieldset className="mt-5">
+      <fieldset className="mt-3">
         <legend className={labelClass}>
           {express.projectLabel} <span className="text-brand-400">*</span>
         </legend>
-        <div className="mt-2.5 grid gap-3 sm:grid-cols-2">
+        <div className="mt-2 grid gap-2 sm:grid-cols-2">
           {express.projects.map((p) => {
             const selected = form.project === p.code;
             return (
@@ -195,7 +230,7 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
                 type="button"
                 key={p.code}
                 onClick={() => setForm((f) => ({ ...f, project: p.code }))}
-                className={`relative rounded-xl border p-4 text-left transition-all ${
+                className={`relative rounded-xl border p-3 text-left transition-all ${
                   selected
                     ? dark
                       ? "border-brand-400 bg-brand-500/10"
@@ -216,13 +251,13 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
                 >
                   {selected && <Icon name="check" size={12} />}
                 </span>
-                <p className={`text-[14px] font-semibold ${dark ? "text-white" : "text-ink"}`}>
+                <p className={`text-[13px] font-semibold ${dark ? "text-white" : "text-ink"}`}>
                   {p.label}
                 </p>
-                <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-400">
+                <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-400">
                   {p.amount}
                 </p>
-                <p className={`mt-2 text-[12px] leading-snug ${dark ? "text-white/55" : "text-slatey-500"}`}>
+                <p className={`mt-1 text-[11px] leading-snug ${dark ? "text-white/55" : "text-slatey-500"}`}>
                   {p.desc}
                 </p>
               </button>
@@ -232,7 +267,7 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
       </fieldset>
 
       {/* Indicative amount */}
-      <div className="mt-5">
+      <div className="mt-3">
         <label htmlFor="ef-amount" className={labelClass}>
           {express.amountLabel} <span className="text-brand-400">*</span>
         </label>
@@ -263,7 +298,7 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
       <button
         type="submit"
         disabled={loading}
-        className="btn-primary mt-7 w-full justify-center disabled:pointer-events-none disabled:opacity-60"
+        className="btn-primary mt-4 w-full justify-center disabled:pointer-events-none disabled:opacity-60"
       >
         {loading ? "Sending…" : express.submitLabel}
       </button>

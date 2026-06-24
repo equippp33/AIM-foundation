@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { ExpressForm } from "@/components/sections/ExpressForm";
+import { LiveExpressionsPanel } from "@/components/sections/LiveExpressionsPanel";
 import { express, footer } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export default function ExpressPage() {
     <div className="flex min-h-screen flex-col bg-mist">
       {/* Slim header */}
       <header className="border-b border-line bg-white/80 backdrop-blur">
-        <div className="container-x flex h-[68px] items-center justify-between">
+        <div className="container-x flex h-[56px] items-center justify-between">
           <Link href="/" aria-label="AIM Foundation home">
             <Logo />
           </Link>
@@ -28,16 +29,18 @@ export default function ExpressPage() {
         </div>
       </header>
 
-      {/* Centered form — fills remaining viewport so no scroll needed */}
-      <main className="flex flex-1 items-center justify-center px-5 py-6">
-        <div className="w-full max-w-xl">
+      {/* Centered form — leaves right gutter for the fixed Live Expressions panel */}
+      <main className="flex flex-1 items-center justify-center px-5 py-4 sm:pr-[380px]">
+        <div className="w-full max-w-lg">
           <div className="text-center">
-            <h1 className="font-display text-[36px] font-bold leading-[1.05] text-ink sm:text-[44px]">
+            <h1 className="font-display text-[22px] font-bold leading-[1.05] text-ink sm:text-[28px]">
               {express.title}
             </h1>
           </div>
 
-          <ExpressForm />
+          <div className="mt-5">
+            <ExpressForm />
+          </div>
         </div>
       </main>
 
@@ -47,6 +50,8 @@ export default function ExpressPage() {
           {footer.copyright}
         </div>
       </footer>
+
+      <LiveExpressionsPanel />
     </div>
   );
 }
