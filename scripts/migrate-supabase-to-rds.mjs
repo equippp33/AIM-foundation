@@ -1,13 +1,18 @@
 /**
  * One-time migration: Supabase sse_pledges → AWS RDS (aim-foundation)
- * Run: node scripts/migrate-supabase-to-rds.mjs
+ * Run: DATABASE_URL=... SUPABASE_URL=... SUPABASE_KEY=... node scripts/migrate-supabase-to-rds.mjs
  */
 
 import pg from "pg";
 
-const SUPABASE_URL = "https://dyqasfwjaucapvqbmmqo.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR5cWFzZndqYXVjYXB2cWJtbXFvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MTI2MDI5OCwiZXhwIjoyMDk2ODM2Mjk4fQ.EcUT_4NdVZypBXiK5iOmHoOhYepnF2PCGqm1xcAkiCc";
-const DATABASE_URL = "postgresql://postgres:4V756XoIfL8@3.111.76.57:5432/aim-foundation";
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
+const DATABASE_URL = process.env.DATABASE_URL;
+
+if (!SUPABASE_URL || !SUPABASE_KEY || !DATABASE_URL) {
+  console.error("Required env vars: SUPABASE_URL, SUPABASE_KEY, DATABASE_URL");
+  process.exit(1);
+}
 
 async function migrate() {
   // ── 1. Fetch all rows from Supabase via REST API ───────────────────────────

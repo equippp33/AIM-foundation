@@ -1,9 +1,12 @@
 import pg from "pg";
 
-const client = new pg.Client({
-  connectionString: "postgresql://postgres:4V756XoIfL8@3.111.76.57:5432/aim-foundation",
-  ssl: false,
-});
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  console.error("DATABASE_URL env var is required. Set it before running this script.");
+  process.exit(1);
+}
+
+const client = new pg.Client({ connectionString, ssl: false });
 
 await client.connect();
 console.log("Connected to RDS.");
