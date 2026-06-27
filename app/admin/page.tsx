@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { LogoutButton } from "@/components/admin/LogoutButton";
 import { LeadsTable, type Pledge } from "@/components/admin/LeadsTable";
-import { createServerSupabaseClient } from "@/lib/supabase-server";
+import pool from "@/lib/db";
 import { projectLabel } from "@/lib/projects";
 
 export const dynamic = "force-dynamic";
@@ -17,20 +17,15 @@ type LoadResult = { rows: Pledge[]; error: string | null };
 
 async function loadPledges(): Promise<LoadResult> {
   try {
-    const supabase = createServerSupabaseClient();
-    const { data, error } = await supabase
-      .from("sse_pledges")
-      .select("id, created_at, name, email, phone, amount, project, status")
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      console.error("Dashboard load error:", error);
-      return { rows: [], error: "Could not load records from the database." };
-    }
-    return { rows: (data ?? []) as Pledge[], error: null };
+    const { rows } = await pool.query(
+      `SELECT id, created_at, name, email, phone, amount, project, status
+       FROM public.sse_pledges
+       ORDER BY created_at DESC`
+    );
+    return { rows: rows as Pledge[], error: null };
   } catch (e) {
-    console.error("Dashboard client error:", e);
-    return { rows: [], error: "Database connection is not configured." };
+    console.error("Dashboard load error:", e);
+    return { rows: [], error: "Could not load records from the database." };
   }
 }
 
@@ -156,7 +151,7 @@ export default async function AdminDashboardPage() {
 
         {error && (
           <div className="mb-7 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-[13.5px] font-medium text-amber-800">
-            {error} Verify the Supabase environment variables are set on the server.
+            {error} Verify the DATABASE_URL environment variable is set on the server.
           </div>
         )}
 
