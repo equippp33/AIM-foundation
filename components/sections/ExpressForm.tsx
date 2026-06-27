@@ -71,8 +71,8 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const amount = Number(form.amount);
-    if (!amount || amount % 10000 !== 0) {
-      setError("Amount must be a positive multiple of ₹10,000.");
+    if (!amount || amount < 1000) {
+      setError("Amount must be at least ₹1,000.");
       return;
     }
     setError("");
@@ -282,8 +282,8 @@ export function ExpressForm({ tone = "light" }: { tone?: Tone }) {
           <input
             id="ef-amount"
             type="number"
-            min={10000}
-            step={10000}
+            min={1000}
+            step={1}
             required
             value={form.amount}
             onChange={update("amount")}

@@ -46,9 +46,9 @@ export async function POST(req: Request) {
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
   }
-  if (!Number.isFinite(amountNum) || amountNum <= 0 || amountNum % 10000 !== 0) {
+  if (!Number.isFinite(amountNum) || amountNum < 1000) {
     return NextResponse.json(
-      { error: "Amount must be a positive multiple of ₹10,000." },
+      { error: "Amount must be at least ₹1,000." },
       { status: 400 }
     );
   }
@@ -214,8 +214,7 @@ export async function POST(req: Request) {
           <tr>
             <td>
               <p style="${F};font-size:14px;color:#334155;margin:0 0 4px;">Warm regards,</p>
-              <p style="${F};font-size:15px;font-weight:700;color:#0c1a2e;margin:0 0 2px;">Equippp Team</p>
-              <p style="${F};font-size:13px;color:#64748b;margin:0;"><a href="mailto:info@aimfoundation.ai" style="color:${BRAND_DARK};text-decoration:none;">info@aimfoundation.ai</a> | +91 96037 70001</p>
+              <p style="${F};font-size:15px;font-weight:700;color:#0c1a2e;margin:0;">Equippp Team</p>
             </td>
           </tr>
         </table>
